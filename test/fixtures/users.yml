@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  alias: MyString
+  birth_date: 2018-12-20
+  last_name: MyString
+  first_name: MyString
+  open: false
+  user_name: MyString
+  work: MyString
+  subscription_code: MyString
+
+two:
+  alias: MyString
+  birth_date: 2018-12-20
+  last_name: MyString
+  first_name: MyString
+  open: false
+  user_name: MyString
+  work: MyString
+  subscription_code: MyString

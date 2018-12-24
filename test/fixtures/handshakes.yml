@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dtype: MyString
+  notified: false
+  result_date: 2018-12-20
+  status: 1
+  sender_id: 1
+  receiver_id: 1
+
+two:
+  dtype: MyString
+  notified: false
+  result_date: 2018-12-20
+  status: 1
+  sender_id: 1
+  receiver_id: 1
