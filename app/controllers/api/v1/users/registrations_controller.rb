@@ -29,7 +29,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       set_minimum_password_length
-      respond_with resource
+      render json: { error_messages: resource.errors.full_messages.join(', ') }, status: 422
     end
   end
 

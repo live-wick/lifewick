@@ -32,6 +32,16 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 	has_many :handshakes
 	has_many :friends, :through => :handshakes
-
+	has_many :shares
+	has_many :receivers, :through => :shares
+	has_many :senders, :through => :shares
 	has_many :wicks, dependent: :destroy
+
+	after_create :create_wick
+
+	def create_wick
+		self.wicks.create(name: "Home")
+		wick = Wick.find_by_name("Lifewick")
+		wick.shares.create(sender_id: wick.user_id, receiver_id: self.id)
+	end
 end

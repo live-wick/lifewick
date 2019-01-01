@@ -18,7 +18,7 @@
 #
 
 class Wick < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
 
  	has_many :strands, dependent: :destroy
  	has_many :shares, as: :shareable
