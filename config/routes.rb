@@ -5,7 +5,11 @@ Rails.application.routes.draw do
       devise_for :users, controllers: {
            registrations: 'api/v1/users/registrations',
        }, skip: [:sessions, :password]
-      resources :wicks, only: :create
+      resources :wicks, only: :create do
+        collection do
+          get :get_user_all_wicks
+        end
+      end
     end
   end
   # root to: "home#index"
