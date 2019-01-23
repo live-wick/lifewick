@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_28_111631) do
+ActiveRecord::Schema.define(version: 2019_01_22_112309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,22 +78,33 @@ ActiveRecord::Schema.define(version: 2018_12_28_111631) do
   create_table "shares", force: :cascade do |t|
     t.integer "sender_id"
     t.integer "receiver_id"
-    t.integer "shareable_id"
     t.string "shareable_type"
+    t.bigint "shareable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["shareable_type", "shareable_id"], name: "index_shares_on_shareable_type_and_shareable_id"
   end
 
   create_table "strands", force: :cascade do |t|
     t.datetime "end_date"
     t.datetime "start_date"
-    t.string "location"
+    t.string "address"
     t.text "description"
     t.bigint "user_id"
     t.bigint "wick_id"
     t.integer "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
+    t.text "notes"
+    t.boolean "all_day", default: false
+    t.boolean "repeat_daily", default: false
+    t.boolean "repeat_weekly", default: false
+    t.boolean "repeat_monthly", default: false
+    t.boolean "repeat_yearly", default: false
+    t.string "latitude"
+    t.string "longitude"
+    t.datetime "remind_me_on"
     t.index ["user_id"], name: "index_strands_on_user_id"
     t.index ["wick_id"], name: "index_strands_on_wick_id"
   end

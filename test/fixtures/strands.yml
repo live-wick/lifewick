@@ -2,16 +2,26 @@
 #
 # Table name: strands
 #
-#  id          :bigint(8)        not null, primary key
-#  description :text
-#  end_date    :datetime
-#  location    :string
-#  source      :integer
-#  start_date  :datetime
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  user_id     :bigint(8)
-#  wick_id     :bigint(8)
+#  id             :bigint(8)        not null, primary key
+#  address        :string
+#  all_day        :boolean          default(FALSE)
+#  description    :text
+#  end_date       :datetime
+#  latitude       :string
+#  longitude      :string
+#  notes          :text
+#  remind_me_on   :datetime
+#  repeat_daily   :boolean          default(FALSE)
+#  repeat_monthly :boolean          default(FALSE)
+#  repeat_weekly  :boolean          default(FALSE)
+#  repeat_yearly  :boolean          default(FALSE)
+#  source         :integer
+#  start_date     :datetime
+#  title          :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  user_id        :bigint(8)
+#  wick_id        :bigint(8)
 #
 # Indexes
 #

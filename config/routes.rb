@@ -10,6 +10,12 @@ Rails.application.routes.draw do
           get :get_user_all_wicks
         end
       end
+
+      resources :strands, only: :create do
+        collection do
+          get :get_all_strands
+        end
+      end
     end
   end
   # root to: "home#index"

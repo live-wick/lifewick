@@ -8,7 +8,11 @@
 #  updated_at     :datetime         not null
 #  receiver_id    :integer
 #  sender_id      :integer
-#  shareable_id   :integer
+#  shareable_id   :bigint(8)
+#
+# Indexes
+#
+#  index_shares_on_shareable_type_and_shareable_id  (shareable_type,shareable_id)
 #
 
 class Share < ApplicationRecord
