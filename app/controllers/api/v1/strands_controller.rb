@@ -20,7 +20,6 @@ class Api::V1::StrandsController < Api::V1::BaseController
     )
     if @strand.save
       params[:shared_strand_users].present? && params[:shared_strand_users].each do |receiver_id|
-        debugger
         shared_user = @strand.shares.new(
           sender_id: current_resource_owner.id,
           receiver_id: receiver_id
