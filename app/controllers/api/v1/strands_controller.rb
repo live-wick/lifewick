@@ -6,8 +6,8 @@ class Api::V1::StrandsController < Api::V1::BaseController
       title: params[:title],
       notes: params[:notes],
       address: params[:address],
-      start_date: params[:start_date],
-      end_date: params[:end_date],
+      start_date: params[:start_date].to_datetime,
+      end_date: params[:end_date].to_datetime,
       all_day: params[:all_day],
       repeat_daily: params[:repeat_daily],
       repeat_weekly: params[:repeat_weekly],
@@ -20,10 +20,16 @@ class Api::V1::StrandsController < Api::V1::BaseController
     )
     if @strand.save
       params[:shared_strand_users].present? && params[:shared_strand_users].each do |receiver_id|
+        debugger
         shared_user = @strand.shares.new(
           sender_id: current_resource_owner.id,
           receiver_id: receiver_id
         )
+        begin
+          shared_user.save!
+        rescue
+          render json: { message: "Error in sharing strands", result: @strand }, status: 401
+        end
       end
       render json: { message: "Strand created successfully", result: @strand }, status: 200
     else
