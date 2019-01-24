@@ -16,7 +16,7 @@ class Api::V1::StrandsController < Api::V1::BaseController
       latitude: params[:latitude],
       longitude: params[:longitude],
       remind_me_on: params[:remind_me_on],
-      user_id: params[:user_id]
+      user_id: current_resource_owner.id
     )
     if @strand.save
       params[:shared_strand_users].present? && params[:shared_strand_users].each do |receiver_id|
