@@ -39,9 +39,13 @@ class Api::V1::StrandsController < Api::V1::BaseController
 
   def get_all_strands
     @all_strands = Strand.all.order('created_at DESC')
-
     if @all_strands.present?
-      render json: {results: @all_strands }, status: 200
+      results = []
+      @all_strands.each do |strand|
+        attachments = strand.attachments.map{|att| url_for(att)}
+        results << strand.as_json.merge!(files: attachments)
+      end
+      render json: {results: results }, status: 200
     else
       render json: { message: "No Strands found", result: [] }, status: 401
     end
@@ -54,4 +58,15 @@ class Api::V1::StrandsController < Api::V1::BaseController
     end
     render json: {message: "Attachments are successfully uploaded"}, status: 200
   end
+
+  # def get_strand_attachments
+  #   strand = Strand.find(params['strand_id'])
+  #   attachments = strand.attachments
+  #   if attachments.present?
+  #     render json: {results: attachments.map{|att| [att.id, url_for(att)]}}, status: 200
+  #   else
+  #     render json: { message: "No Attachments found", result: [] }, status: 401
+  #   end
+
+  # end
 end
