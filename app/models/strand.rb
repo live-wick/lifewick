@@ -39,5 +39,6 @@ class Strand < ApplicationRecord
   belongs_to :user
   belongs_to :wick
  	has_many :shares, as: :shareable
+  has_many_attached :attachments
 
 end

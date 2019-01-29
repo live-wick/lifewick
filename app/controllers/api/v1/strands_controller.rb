@@ -46,4 +46,12 @@ class Api::V1::StrandsController < Api::V1::BaseController
       render json: { message: "No Strands found", result: [] }, status: 401
     end
   end
+
+  def add_attachments
+    strand = Strand.find(params['strand_id'])
+    params['files'].each do |filee|
+      strand.attachments.attach(filee)
+    end
+    render json: {message: "Attachments are successfully uploaded"}, status: 200
+  end
 end
