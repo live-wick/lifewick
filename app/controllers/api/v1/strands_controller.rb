@@ -38,7 +38,9 @@ class Api::V1::StrandsController < Api::V1::BaseController
   end
 
   def get_all_strands
-    @all_strands = Strand.all.order('created_at DESC')
+    wick_ids = current_resource_owner.wicks.pluck(:id)
+    @all_strands = Strand.where(wick_id: wick_ids).order('created_at DESC')
+    # @all_strands = Strand.all.order('created_at DESC')
     if @all_strands.present?
       results = []
       @all_strands.each do |strand|
