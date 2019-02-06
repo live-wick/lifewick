@@ -20,7 +20,6 @@ class Api::V1::StrandsController < Api::V1::BaseController
       wick_name: wick.name
     )
     if @strand.save
-      debugger
       shared_strand_user_ids = params[:shared_strand_users].present? ? params[:shared_strand_users] : User.pluck(:id)
       shared_strand_user_ids.present? && shared_strand_user_ids.each do |receiver_id|
         shared_user = @strand.shares.new(
