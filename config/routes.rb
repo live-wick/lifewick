@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   use_doorkeeper
   scope module: :api, defaults: { format: :json }, path: 'api' do
     scope module: :v1 do
+
       devise_for :users, controllers: {
            registrations: 'api/v1/users/registrations',
        }, skip: [:sessions, :password]
+
       resources :wicks, only: :create do
         collection do
           get :get_user_all_wicks
@@ -15,6 +17,12 @@ Rails.application.routes.draw do
         post :add_attachments
         collection do
           get :get_all_strands
+        end
+      end
+
+      resources :users, only: :fetch_users do
+        collection do
+          get :fetch_users
         end
       end
     end
