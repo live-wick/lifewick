@@ -5,8 +5,8 @@ class Api::V1::UsersController < Api::V1::BaseController
       @users = User.where(email: params[:email])
     end
 
-    if params[:user_name].present?
-      @users = @users.present? ? @users.where(user_name: params[:user_name]) :  User.where(user_name: params[:user_name])
+    if params[:name].present?
+      @users = @users.present? ? @users.search_by_full_name(params[:name]) :  User.search_by_full_name(params[:name])
     end
 
     if @users.present?

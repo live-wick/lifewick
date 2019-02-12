@@ -44,4 +44,10 @@ class User < ApplicationRecord
 		wick = Wick.find_by_name("Lifewick")
 		wick.shares.create(sender_id: wick.user_id, receiver_id: self.id)
 	end
+
+  
+  def self.search_by_full_name(search)
+    @names = search.split(" ")
+    where("first_name LIKE :search1 OR first_name LIKE :search2 OR last_name LIKE :search1 OR last_name LIKE :search2", search1: "#{@names[0]}", search2: "#{@names[1]}")
+  end
 end
