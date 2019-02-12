@@ -46,7 +46,7 @@ class Api::V1::StrandsController < Api::V1::BaseController
       results = []
       @all_strands.each do |strand|
         attachments = strand.attachments.map{|att| url_for(att)}
-        results << strand.as_json.merge!(files: attachments)
+        results << strand.as_json.merge!(files: attachments).merge!(shared_with_users: strand.shares.map(&:receiver).pluck(:id))
       end
       render json: {results: results }, status: 200
     else
