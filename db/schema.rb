@@ -10,16 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_22_112309) do
+ActiveRecord::Schema.define(version: 2019_02_14_111512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "attachments", force: :cascade do |t|
     t.text "description"
     t.bigint "strand_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "file_file_name"
+    t.string "file_content_type"
+    t.integer "file_file_size"
+    t.datetime "file_updated_at"
     t.index ["strand_id"], name: "index_attachments_on_strand_id"
   end
 
@@ -105,6 +130,9 @@ ActiveRecord::Schema.define(version: 2019_01_22_112309) do
     t.string "latitude"
     t.string "longitude"
     t.datetime "remind_me_on"
+    t.string "wick_name"
+    t.boolean "is_public", default: true
+    t.boolean "is_private", default: false
     t.index ["user_id"], name: "index_strands_on_user_id"
     t.index ["wick_id"], name: "index_strands_on_wick_id"
   end
@@ -137,6 +165,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_112309) do
     t.index ["user_id"], name: "index_wicks_on_user_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attachments", "strands"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"

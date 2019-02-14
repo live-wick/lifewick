@@ -17,7 +17,9 @@ class Api::V1::StrandsController < Api::V1::BaseController
       longitude: params[:longitude],
       remind_me_on: params[:remind_me_on],
       user_id: current_resource_owner.id,
-      wick_name: wick.name
+      wick_name: wick.name,
+      is_public: params[:shared_strand_users].present? ? false : true,
+      is_private: params[:shared_strand_users].present? ? true : false
     )
     if @strand.save
       shared_strand_user_ids = params[:shared_strand_users].present? ? params[:shared_strand_users] : User.pluck(:id)
