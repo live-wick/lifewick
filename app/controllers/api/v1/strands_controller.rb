@@ -42,7 +42,9 @@ class Api::V1::StrandsController < Api::V1::BaseController
 
   def get_all_strands
     wick_ids = current_resource_owner.wicks.pluck(:id)
-    @all_strands = Strand.where(wick_id: wick_ids).order('created_at DESC')
+    user_created_strands = Strand.where(wick_id: wick_ids).order('created_at DESC').to_a
+    followed_strands = Share.followed_user_strands(current_resource_owner.id).map(&:shareable)
+    @all_strands = (user_created_strands + followed_strands).uniq
     # @all_strands = Strand.all.order('created_at DESC')
     if @all_strands.present?
       results = []

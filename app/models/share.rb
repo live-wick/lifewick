@@ -21,6 +21,9 @@ class Share < ApplicationRecord
 	belongs_to :sender, :class_name => 'User'
 	belongs_to :receiver, :class_name => 'User'
 
-  scope :shared_user_wicks, -> (user_id) {where(sender_id: user_id)}
-  scope :followed_user_wicks, -> (user_id) {where(receiver_id: user_id)}
+  scope :shared_user_wicks, -> (user_id) {where(sender_id: user_id, shareable_type: 'Wick')}
+  scope :followed_user_wicks, -> (user_id) {where(receiver_id: user_id, shareable_type: 'Wick')}
+
+  scope :shared_user_strands, -> (user_id) {where(sender_id: user_id, shareable_type: 'Strand')}
+  scope :followed_user_strands, -> (user_id) {where(receiver_id: user_id, shareable_type: 'Strand')}
 end
