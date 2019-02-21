@@ -2,7 +2,14 @@
 
 class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   skip_before_action :verify_authenticity_token, only: :create
- 
+  swagger_controller :registrations, 'User Sign Up'
+
+  swagger_api :create do |api| 
+    summary 'Sign Up'
+    param :query, "registration[email]", :string, :required, 'Email Address'
+    param :query, "registration[password]", :string, :required, 'Password'
+
+  end
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 

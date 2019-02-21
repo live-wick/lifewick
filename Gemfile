@@ -16,6 +16,7 @@ gem 'doorkeeper'
 gem 'devise'
 gem "figaro"
 gem 'aws-sdk', '~> 3'
+gem 'swagger-docs'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
