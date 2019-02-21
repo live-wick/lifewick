@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 class Api::V1::Users::SessionsController < Devise::SessionsController
+
+  swagger_controller :wicks, 'Create user'
+
+  swagger_api :create do |api| 
+    summary 'Creating New Wick'
+    param :header, 'Authorization', :string, :required, "Authorization"
+    param :query, "name", :string, :required, 'Wick Name'
+  end
+
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

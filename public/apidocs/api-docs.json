@@ -1,11 +1,19 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "https://lifewick.herokuapp.com",
+  "basePath": "http://localhost:3000",
   "apis": [
+    {
+      "path": "/apidocs/doorkeeper/tokens.{format}",
+      "description": "User Sign In"
+    },
     {
       "path": "/apidocs/api/v1/users/registrations.{format}",
       "description": "User Sign Up"
+    },
+    {
+      "path": "/apidocs/api/v1/wicks.{format}",
+      "description": "Create Wick"
     }
   ],
   "authorizations": null,

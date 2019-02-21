@@ -1,4 +1,11 @@
 class Api::V1::WicksController < Api::V1::BaseController
+  swagger_controller :wicks, 'Create Wick'
+
+  swagger_api :create do |api| 
+    summary 'Creating New Wick'
+    param :header, 'Authorization', :string, :required, "Authorization"
+    param :query, "name", :string, :required, 'Wick Name'
+  end
 
 	def create
 		@wick = current_resource_owner.wicks.new(name: params[:name])
