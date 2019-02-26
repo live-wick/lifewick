@@ -10,7 +10,6 @@ class Api::V1::WicksController < Api::V1::BaseController
   swagger_api :get_user_all_wicks do |api| 
     summary 'Get User Wicks'
     param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
-    param :query, "name", :string, :required, 'Wick Name'
   end
 
 	def create

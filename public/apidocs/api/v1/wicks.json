@@ -16,13 +16,6 @@
               "type": "string",
               "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
               "required": true
-            },
-            {
-              "paramType": "query",
-              "name": "name",
-              "type": "string",
-              "description": "Wick Name",
-              "required": true
             }
           ],
           "nickname": "Api::V1::Wicks#get_user_all_wicks",
