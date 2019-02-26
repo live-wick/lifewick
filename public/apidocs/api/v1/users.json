@@ -1,0 +1,42 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "https://lifewick.herokuapp.com",
+  "resourcePath": "users",
+  "apis": [
+    {
+      "path": "/api/users/fetch_users.json",
+      "operations": [
+        {
+          "summary": "Search User by Email or Name",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "email",
+              "type": "string",
+              "description": "Email Address",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "name",
+              "type": "string",
+              "description": "User Full Name",
+              "required": false
+            }
+          ],
+          "nickname": "Api::V1::Users#fetch_users",
+          "method": "get"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

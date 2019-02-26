@@ -1,5 +1,44 @@
 class Api::V1::StrandsController < Api::V1::BaseController
 
+
+  swagger_controller :Strands, 'Strands API'
+
+  swagger_api :create do |api| 
+    summary 'Search User by Email or Name'
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+    param :query, "title", :string, :required, 'Title'
+    param :query, "notes", :string, :optional, 'Notes'
+    param :query, "address", :string, :optional, 'Address'
+    param :query, "start_date", :datetime, :optional, 'Start Date'
+    param :query, "end_date", :datetime, :optional, 'End Date'
+    param :query, "all_day", :boolean, :optional, 'All Day'
+    param :query, "repeat_daily", :boolean, :optional, 'Repeat Daily'
+    param :query, "repeat_weekly", :boolean, :optional, 'Repeat Weekly'
+    param :query, "repeat_monthly", :boolean, :optional, 'Repeat Monthly'
+    param :query, "repeat_yearly", :boolean, :optional, 'Repeat Yearly'
+    param :query, "latitude", :string, :optional, 'Latitude'
+    param :query, "longitude", :string, :optional, 'Longitude'
+    param :query, "remind_me_on", :string, :optional, 'Remind me on'
+    param :query, "wick_id", :string, :required, 'Wick ID'
+
+  end
+
+
+  swagger_api :get_all_strands do |api| 
+    summary "Get User's All Strands"
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+  end
+
+  swagger_api :add_attachments do |api| 
+    summary "Add Attachements For Strand"
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+    param :path, "strand_id", :integer, :required, 'Strand ID'
+    param :query, "files[]", :file, :required, 'File'
+
+
+  end
+
+
   def create
     wick = Wick.find(params[:wick_id])
     @strand = wick.strands.new(

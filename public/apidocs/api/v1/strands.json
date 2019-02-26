@@ -1,0 +1,178 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "https://lifewick.herokuapp.com",
+  "resourcePath": "strands",
+  "apis": [
+    {
+      "path": "/api/strands/{strand_id}/add_attachments.json",
+      "operations": [
+        {
+          "summary": "Add Attachements For Strand",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "strand_id",
+              "type": "integer",
+              "description": "Strand ID",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "files[]",
+              "type": "file",
+              "description": "File",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Strands#add_attachments",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/strands/get_all_strands.json",
+      "operations": [
+        {
+          "summary": "Get User's All Strands",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Strands#get_all_strands",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/strands.json",
+      "operations": [
+        {
+          "summary": "Search User by Email or Name",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "title",
+              "type": "string",
+              "description": "Title",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "notes",
+              "type": "string",
+              "description": "Notes",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "address",
+              "type": "string",
+              "description": "Address",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "start_date",
+              "type": "datetime",
+              "description": "Start Date",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "end_date",
+              "type": "datetime",
+              "description": "End Date",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "all_day",
+              "type": "boolean",
+              "description": "All Day",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "repeat_daily",
+              "type": "boolean",
+              "description": "Repeat Daily",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "repeat_weekly",
+              "type": "boolean",
+              "description": "Repeat Weekly",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "repeat_monthly",
+              "type": "boolean",
+              "description": "Repeat Monthly",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "repeat_yearly",
+              "type": "boolean",
+              "description": "Repeat Yearly",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "latitude",
+              "type": "string",
+              "description": "Latitude",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "longitude",
+              "type": "string",
+              "description": "Longitude",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "remind_me_on",
+              "type": "string",
+              "description": "Remind me on",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "wick_id",
+              "type": "string",
+              "description": "Wick ID",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Strands#create",
+          "method": "post"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

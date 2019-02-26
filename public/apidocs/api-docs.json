@@ -14,6 +14,14 @@
     {
       "path": "/apidocs/api/v1/wicks.{format}",
       "description": "Create Wick"
+    },
+    {
+      "path": "/apidocs/api/v1/strands.{format}",
+      "description": "Strands API"
+    },
+    {
+      "path": "/apidocs/api/v1/users.{format}",
+      "description": "Search User"
     }
   ],
   "authorizations": null,

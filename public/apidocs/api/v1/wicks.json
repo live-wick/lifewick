@@ -5,6 +5,32 @@
   "resourcePath": "wicks",
   "apis": [
     {
+      "path": "/api/wicks/get_user_all_wicks.json",
+      "operations": [
+        {
+          "summary": "Get User Wicks",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "name",
+              "type": "string",
+              "description": "Wick Name",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Wicks#get_user_all_wicks",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/wicks.json",
       "operations": [
         {
@@ -14,7 +40,7 @@
               "paramType": "header",
               "name": "Authorization",
               "type": "string",
-              "description": "Authorization",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
               "required": true
             },
             {
