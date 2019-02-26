@@ -1,6 +1,6 @@
 class Api::V1::UsersController < Api::V1::BaseController
 
-  swagger_controller :Users, 'Search User'
+  swagger_controller :Users, 'User Management'
 
   swagger_api :fetch_users do |api| 
     summary 'Search User by Email or Name'

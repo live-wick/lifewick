@@ -13,15 +13,15 @@
     },
     {
       "path": "/apidocs/api/v1/wicks.{format}",
-      "description": "Create Wick"
+      "description": "Wick Management"
     },
     {
       "path": "/apidocs/api/v1/strands.{format}",
-      "description": "Strands API"
+      "description": "Strand Management"
     },
     {
       "path": "/apidocs/api/v1/users.{format}",
-      "description": "Search User"
+      "description": "User Management"
     }
   ],
   "authorizations": null,

@@ -1,5 +1,5 @@
 class Api::V1::WicksController < Api::V1::BaseController
-  swagger_controller :wicks, 'Create Wick'
+  swagger_controller :wicks, 'Wick Management'
 
   swagger_api :create do |api| 
     summary 'Creating New Wick'

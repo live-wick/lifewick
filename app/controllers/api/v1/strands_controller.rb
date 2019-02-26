@@ -1,7 +1,7 @@
 class Api::V1::StrandsController < Api::V1::BaseController
 
 
-  swagger_controller :Strands, 'Strands API'
+  swagger_controller :Strands, 'Strand Management'
 
   swagger_api :create do |api| 
     summary 'Search User by Email or Name'
