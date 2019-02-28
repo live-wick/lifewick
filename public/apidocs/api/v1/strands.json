@@ -172,6 +172,130 @@
           "method": "post"
         }
       ]
+    },
+    {
+      "path": "/api/strands/{id}.json",
+      "operations": [
+        {
+          "summary": "Update Strand",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Strand ID",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "title",
+              "type": "string",
+              "description": "Title",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "notes",
+              "type": "string",
+              "description": "Notes",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "address",
+              "type": "string",
+              "description": "Address",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "start_date",
+              "type": "datetime",
+              "description": "Start Date",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "end_date",
+              "type": "datetime",
+              "description": "End Date",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "all_day",
+              "type": "boolean",
+              "description": "All Day",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "repeat_daily",
+              "type": "boolean",
+              "description": "Repeat Daily",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "repeat_weekly",
+              "type": "boolean",
+              "description": "Repeat Weekly",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "repeat_monthly",
+              "type": "boolean",
+              "description": "Repeat Monthly",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "repeat_yearly",
+              "type": "boolean",
+              "description": "Repeat Yearly",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "latitude",
+              "type": "string",
+              "description": "Latitude",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "longitude",
+              "type": "string",
+              "description": "Longitude",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "remind_me_on",
+              "type": "string",
+              "description": "Remind me on",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "wick_id",
+              "type": "string",
+              "description": "Wick ID",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Strands#update",
+          "method": "patch"
+        }
+      ]
     }
   ],
   "authorizations": null

@@ -34,10 +34,27 @@ class Api::V1::StrandsController < Api::V1::BaseController
     param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
     param :path, "strand_id", :integer, :required, 'Strand ID'
     param :query, "files[]", :file, :required, 'File'
-
-
   end
 
+  swagger_api :update do |api| 
+    summary "Update Strand"
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+    param :path, "id", :integer, :required, 'Strand ID'
+    param :query, "title", :string, :required, 'Title'
+    param :query, "notes", :string, :optional, 'Notes'
+    param :query, "address", :string, :optional, 'Address'
+    param :query, "start_date", :datetime, :optional, 'Start Date'
+    param :query, "end_date", :datetime, :optional, 'End Date'
+    param :query, "all_day", :boolean, :optional, 'All Day'
+    param :query, "repeat_daily", :boolean, :optional, 'Repeat Daily'
+    param :query, "repeat_weekly", :boolean, :optional, 'Repeat Weekly'
+    param :query, "repeat_monthly", :boolean, :optional, 'Repeat Monthly'
+    param :query, "repeat_yearly", :boolean, :optional, 'Repeat Yearly'
+    param :query, "latitude", :string, :optional, 'Latitude'
+    param :query, "longitude", :string, :optional, 'Longitude'
+    param :query, "remind_me_on", :string, :optional, 'Remind me on'
+    param :query, "wick_id", :string, :required, 'Wick ID'
+  end
 
   def create
     wick = Wick.find(params[:wick_id])
@@ -89,7 +106,7 @@ class Api::V1::StrandsController < Api::V1::BaseController
       results = []
       @all_strands.each do |strand|
         attachments = strand.attachments.map{|att| url_for(att)}
-        results << strand.as_json.merge!(files: attachments).merge!(shared_with_users: strand.shares.map(&:receiver).pluck(:id))
+        results << strand.as_json.merge!(files: attachments).merge!(shared_with_users: strand.shares.map(&:receiver))
       end
       render json: {results: results }, status: 200
     else
@@ -103,6 +120,40 @@ class Api::V1::StrandsController < Api::V1::BaseController
       strand.attachments.attach(filee)
     end
     render json: {message: "Attachments are successfully uploaded"}, status: 200
+  end
+
+  def update
+    @strand = Strand.find(params[:id])
+    if @strand.update(strand_params)
+      shared_strand_user_ids = params[:shared_strand_users].present? ? params[:shared_strand_users] : User.pluck(:id)
+      debugger
+      if shared_strand_user_ids.present?
+        @strand.shares.destroy_all
+        shared_strand_user_ids.each do |receiver_id|
+          shared_user = @strand.shares.new(
+            sender_id: current_resource_owner.id,
+            receiver_id: receiver_id
+          )
+          begin
+            shared_user.save!
+          rescue
+            render json: { message: "Error in sharing strands", result: @strand }, status: 401
+          end
+        end
+      end
+      render json: {results: @strand, message: "Strand is successfully updated" }, status: 200
+    else
+      render json: { message: @strand.errors.full_messages.join(', '), result: [] }, status: 401
+
+    end
+
+
+
+  end
+
+  private
+  def strand_params
+    params[:strand].permit(:title, :notes, :address, :start_date, :end_date, :all_day, :repeat_daily, :repeat_weekly, :repeat_monthly, :repeat_yearly, :latitude, :longitude, :remind_me_on, :user_id, :wick_name, :is_public, :is_private)
   end
 
   # def get_strand_attachments
