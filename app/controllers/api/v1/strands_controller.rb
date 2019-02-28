@@ -129,6 +129,7 @@ class Api::V1::StrandsController < Api::V1::BaseController
       shared_strand_user_ids = params[:shared_strand_users].present? ? params[:shared_strand_users] : User.pluck(:id)
       if shared_strand_user_ids.present?
         @strand.shares.destroy_all
+        @strand.attachments.destroy_all
         shared_strand_user_ids.each do |receiver_id|
           shared_user = @strand.shares.new(
             sender_id: current_resource_owner.id,
