@@ -116,6 +116,7 @@ class Api::V1::StrandsController < Api::V1::BaseController
 
   def add_attachments
     strand = Strand.find(params['strand_id'])
+    strand.attachments.destroy_all if strand.attachments.attached?
     params['files'].each do |filee|
       strand.attachments.attach(filee)
     end
