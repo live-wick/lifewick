@@ -140,7 +140,7 @@ class Api::V1::StrandsController < Api::V1::BaseController
           end
         end
       end
-      render json: {results: @strand, message: "Strand is successfully updated" }, status: 200
+      render json: {result: @strand, message: "Strand is successfully updated" }, status: 200
     else
       render json: { message: @strand.errors.full_messages.join(', '), result: [] }, status: 401
 
