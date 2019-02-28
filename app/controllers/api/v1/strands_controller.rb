@@ -126,7 +126,6 @@ class Api::V1::StrandsController < Api::V1::BaseController
     @strand = Strand.find(params[:id])
     if @strand.update(strand_params)
       shared_strand_user_ids = params[:shared_strand_users].present? ? params[:shared_strand_users] : User.pluck(:id)
-      debugger
       if shared_strand_user_ids.present?
         @strand.shares.destroy_all
         shared_strand_user_ids.each do |receiver_id|
