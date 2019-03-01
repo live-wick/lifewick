@@ -124,8 +124,27 @@ class Api::V1::StrandsController < Api::V1::BaseController
   end
 
   def update
+    wick = Wick.find(params[:wick_id])
     @strand = Strand.find(params[:id])
-    if @strand.update(strand_params)
+    if @strand.update(
+      title: params[:title],
+      notes: params[:notes],
+      address: params[:address],
+      start_date: params[:start_date].to_datetime,
+      end_date: params[:end_date].to_datetime,
+      all_day: params[:all_day],
+      repeat_daily: params[:repeat_daily],
+      repeat_weekly: params[:repeat_weekly],
+      repeat_monthly: params[:repeat_monthly],
+      repeat_yearly: params[:repeat_yearly],
+      latitude: params[:latitude],
+      longitude: params[:longitude],
+      remind_me_on: params[:remind_me_on],
+      user_id: current_resource_owner.id,
+      wick_name: wick.name,
+      is_public: params[:shared_strand_users].present? ? false : true,
+      is_private: params[:shared_strand_users].present? ? true : false
+    )
       shared_strand_user_ids = params[:shared_strand_users].present? ? params[:shared_strand_users] : User.pluck(:id)
       if shared_strand_user_ids.present?
         @strand.shares.destroy_all
