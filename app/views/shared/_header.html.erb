@@ -1,0 +1,313 @@
+<nav class="navbar navbar-expand fixed-top be-top-header">
+  <div class="container-fluid">
+    <div class="be-navbar-header"><a class="navbar-brand" href="index.html">
+      <%= image_tag 'logo-2.png' %>
+    </a>
+    </div>
+
+    <div class="be-right-navbar">
+      <ul class="nav navbar-nav float-right be-user-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
+            <%= image_tag 'avatar.png' %>
+            <span class="user-name">User name</span>
+          </a>
+          <div class="dropdown-menu" role="menu">     
+            <div class="user-info">
+              <div class="user-name">User Name</div>
+              
+            </div>
+           
+              <a class="dropdown-item" href="#">
+                <span class="icon far fa-comment-alt"></span>Feedback
+              </a>
+              <a class="dropdown-item" href="#">
+                <span class="icon fas fa-file-signature mr-1"></span>Term and Conditions
+              </a>
+              <a class="dropdown-item" href="#">
+                <span class="icon fas fa-file-contract"></span>Privacy Policy
+              </a>
+              <a class="dropdown-item" href="#">
+                <span class="icon fas fa-layer-group"></span>Manage Group
+              </a>
+              <a class="dropdown-item" href="#">
+                <span class="icon mdi mdi-settings"></span>Update Profile
+              </a>
+              <a class="dropdown-item" href="pages-login.html">
+                <span class="icon mdi mdi-power"></span>Log out
+              </a>
+          </div>
+        </li>
+      </ul>
+      <div class="search-container">
+        <div class="input-group input-group-sm">
+          <div class="dropdown new-wick">
+           <button class="btn btn-space btn-primary hover dropdown-toggle" data-toggle="dropdown">New Strand</button>
+            <div class="dropdown-menu" role="menu" x-placement="top-start">
+              <div class="pl-2 pr-2">
+               <div class="row">
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <input type="text" name="" class="form-control form-control-sm" placeholder="Strand Subject">
+                   </div>
+                 </div>
+                 <div class="col-md-6 text-right">
+                   <div class="twite-image mr-2">
+                      <%= image_tag 'avatar.png' %>
+                    </div>
+                    <div class="twite-image mr-2">
+                      <%= image_tag 'avatar.png' %>
+                    </div>
+                    <div class="twite-image mr-2">
+                      <%= image_tag 'avatar.png' %>
+                    </div>  
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="col-md-12">
+                  <div class="form-group">
+                     <textarea  class="form-control form-control-sm" rows="3" placeholder="Strand Contents"></textarea>
+                   </div>
+                 </div>
+               </div>
+             </div>
+             <div class="card-header-divider m-0 pb-0"></div>
+               <div class="pl-2 pr-2 pt-2">
+                  <div class="row">
+                     <div class="col-md-6">
+                        <a href="#" class="mr-1">
+                          <i class="far fa-calendar"></i>
+                        </a>
+                        <a href="#" class="mr-1">
+                          <i class="far fa-map"></i>
+                        </a>
+                        <a href="#" class="mr-1">
+                          <i class="fas fa-map-marker-alt"></i>
+                        </a>
+                        <span class="file-upload">
+                            <input class="inputfile" id="file-2" type="file" name="file-2">
+                            <label for="file-2"> <i class="fas fa-paperclip"></i></label>
+                        </span>
+                     </div>
+                     <div class="col-md-6">
+                       <div class="text-right">
+                         <button class="btn btn-primary btn-xs">Wick It</button>
+                         <button class="btn btn-default btn-xs">Cancel</button>
+                       </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+          </div>
+          <input class="form-control search-input search" type="text" name="search" placeholder="Search Wick"><span class="input-group-btn">
+        <button class="btn btn-primary search-btn" type="button"><i class="icon mdi mdi-search"></i></button></span>
+      </div>
+    </div>
+      <ul class="nav navbar-nav float-right be-icons-nav">
+        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><span class="icon mdi mdi-calendar-alt"></span></a>
+          <ul class="dropdown-menu be-notifications">
+            <li>
+              
+              <div class="list">
+                <div class="be-scroller-notifications scrollbar-macosx">
+                  <div class="content">
+                    <ul>
+                      <li class="notification">
+                        <a href="#">
+                          <div class="notification-info pl-0">
+                            <div class="text">
+                              <span class="user-name text-uppercase">Today</span><br>
+                              <span class="text-uppercase">10AM</span> Glee Club Practice
+                            </div>
+                            <div class="text ml-2 mt-2">
+                              <span class="text-uppercase">3PM</span> Meeting with sam
+                            </div>
+                            <div class="text ml-2 mt-2">
+                              <span class="text-uppercase">6PM</span> Dinner and a Movie
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li class="notification">
+                        <a href="#">
+                          <div class="notification-info pl-0">
+                            <div class="text">
+                              <span class="user-name text-uppercase">Today</span><br>
+                              <span class="text-uppercase">10AM</span> Glee Club Practice
+                            </div>
+                            <div class="text ml-2 mt-2">
+                              <span class="text-uppercase">3PM</span> Meeting with sam
+                            </div>
+                            <div class="text ml-2 mt-2">
+                              <span class="text-uppercase">6PM</span> Dinner and a Movie
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li class="notification">
+                        <a href="#">
+                          <div class="notification-info pl-0">
+                            <div class="text">
+                              <span class="user-name text-uppercase">Tuesday</span><br>
+                              <span class="text-uppercase">10PM</span>Pub Crawl with church
+                            </div>
+                            <div class="text ml-2 mt-2">
+                              Seniors Club
+                            </div>
+                            
+                          </div>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+            </li>
+          </ul>
+        </li>
+       
+        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><span class="icon far fa-handshake"></span><span class="indicator"></span></a>
+          <ul class="dropdown-menu be-notifications">
+            <li>
+              
+              <div class="list">
+                <div class="be-scroller-notifications scrollbar-macosx">
+                  <div class="content">
+                    <ul>
+                      <li class="notification">
+                        <a href="#">
+                          <div class="image">
+                            <%= image_tag 'avatar.png' %>
+                          </div>
+                          <div class="notification-info">
+                            <div class="text">
+                              Jethro Chambermanson
+                              <div class="float-left mt-2">
+                                <button class="btn btn-space btn-success btn-xs">Accept</button>
+                                <button class="btn btn-space btn-danger btn-xs">Ignore</button>
+                              </div>
+                          </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li class="notification">
+                        <a href="#">
+                          <div class="image">
+                            <%= image_tag 'avatar2.png' %>
+                          </div>
+                          <div class="notification-info">
+                            <div class="text">
+                              Jethro Chambermanson
+                              <div class="float-left mt-2">
+                                <button class="btn btn-space btn-success btn-xs">Accept</button>
+                                <button class="btn btn-space btn-danger btn-xs">Ignore</button>
+                              </div>
+                          </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li class="notification">
+                        <a href="#">
+                          <div class="image">
+                            <%= image_tag 'avatar2.png' %>
+                          </div>
+                          <div class="notification-info">
+                            <div class="text">
+                              Jethro Chambermanson
+                              <div class="float-left mt-2">
+                                <button class="btn btn-space btn-success btn-xs">Accept</button>
+                                <button class="btn btn-space btn-danger btn-xs">Ignore</button>
+                              </div>
+                          </div>
+                          </div>
+                        </a>
+                      </li>
+                      
+                    </ul>
+                  
+                  </div>
+
+                </div>
+                <div class="footer pl-2 pr-2 pt-3 pb-3">
+                   <button class="btn btn-default btn-sm btn-block">View All</button>
+                   <button class="btn btn-primary btn-sm btn-block">Invite</button>
+                </div>
+              </div>
+              
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><span class="icon mdi mdi-notifications"></span></a>
+          <ul class="dropdown-menu be-notifications">
+            <li>
+              <div class="list">
+                <div class="be-scroller-notifications scrollbar-macosx">
+                  <div class="content">
+                    <ul>
+                      <li class="notification">
+                        <a href="#">
+                          <div class="image">
+                            <%= image_tag 'avatar2.png' %>
+                          </div>
+                          <div class="notification-info">
+                            <div class="text">
+                              Jethro Chambermanson commented your stand 3 days left until.
+                             <div><small><i class="fas fa-comment-alt"></i> 3.45pm</small></div>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li class="notification">
+                        <a href="#">
+                          <div class="image">
+                            <%= image_tag 'avatar2.png' %>
+                          </div>
+                          <div class="notification-info">
+                            <div class="text">
+                              Jethro Chambermanson commented your stand 3 days left until.
+                             <div><small><i class="fas fa-comment-alt"></i> 3.45pm</small></div>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li class="notification">
+                        <a href="#">
+                          <div class="image">
+                            <%= image_tag 'avatar2.png' %>
+                          </div>
+                          <div class="notification-info">
+                            <div class="text">
+                              Jethro Chambermanson commented your stand 3 days left until.
+                             <div><small><i class="fas fa-comment-alt"></i> 3.45pm</small></div>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li class="notification">
+                        <a href="#">
+                          <div class="image">
+                            <%= image_tag 'avatar2.png' %>
+                          </div>
+                          <div class="notification-info">
+                            <div class="text">
+                              Jethro Chambermanson commented your stand 3 days left until.
+                             <div><small><i class="fas fa-comment-alt"></i> 3.45pm</small></div>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      
+                    </ul>
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="footer"> <a href="#">More</a></div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

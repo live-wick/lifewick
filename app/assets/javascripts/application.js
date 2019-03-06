@@ -13,4 +13,14 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require_tree .
+//= require lib/jquery/jquery.min
+//= require lib/perfect-scrollbar/js/perfect-scrollbar.min
+//= require lib/bootstrap/dist/js/bootstrap.bundle.min
+//= require app
+//= require lib/jquery-ui/jquery-ui.min
+//= require app-dashboard
+//= require lib/moment.js/min/moment.min
+//= require lib/jquery.fullcalendar/fullcalendar.min
+//= require app-page-calendar
+//= require font_awesome5
+//= require custom

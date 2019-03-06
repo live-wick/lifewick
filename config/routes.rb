@@ -27,6 +27,14 @@ Rails.application.routes.draw do
       end
     end
   end
-  # root to: "home#index"
+
+  # devise_scope :user do
+  #   match "/users/sign_in" => "api/v1/users/sessions#new"
+  # end
+
+  devise_scope :user do
+    root to: "api/v1/users/sessions#new"
+  end
+  # root to: "api/v1/users/sessions#new"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -17,6 +17,7 @@ gem 'devise'
 gem "figaro"
 gem 'aws-sdk', '~> 3'
 gem 'swagger-docs'
+gem 'font_awesome5_rails'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 

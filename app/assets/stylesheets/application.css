@@ -10,6 +10,11 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
+ *= require lib/perfect-scrollbar/css/perfect-scrollbar
+ *= require lib/material-design-icons/css/material-design-iconic-font.min
+ *= require lib/datetimepicker/css/bootstrap-datetimepicker.min
+ *= require lib/jquery.fullcalendar/fullcalendar.min
+ *= require font_awesome5_webfont
+ *= require app
+ *= require custom
  */
