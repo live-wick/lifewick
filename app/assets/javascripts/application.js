@@ -10,17 +10,19 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
-//= require activestorage
-//= require turbolinks
-//= require lib/jquery/jquery.min
-//= require lib/perfect-scrollbar/js/perfect-scrollbar.min
+
+//= require jquery3
+//= require popper
+//= require bootstrap
+//= require perfect-scrollbar.min
 //= require lib/bootstrap/dist/js/bootstrap.bundle.min
 //= require app
-//= require lib/jquery-ui/jquery-ui.min
+//= require jquery_ujs
 //= require app-dashboard
-//= require lib/moment.js/min/moment.min
-//= require lib/jquery.fullcalendar/fullcalendar.min
+//= require jquery-scrollbar
+//= require moment.min
+//= require fullcalendar.min
 //= require app-page-calendar
+//= require activestorage
 //= require font_awesome5
 //= require custom

@@ -13,6 +13,8 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'doorkeeper'
+gem 'bootstrap', '~> 4.1.3'
+gem 'jquery-rails'
 gem 'devise'
 gem "figaro"
 gem 'aws-sdk', '~> 3'
