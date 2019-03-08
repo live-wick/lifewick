@@ -13,6 +13,7 @@
 
 //= require jquery3
 //= require popper
+//= require parsley
 //= require bootstrap
 //= require perfect-scrollbar.min
 //= require lib/bootstrap/dist/js/bootstrap.bundle.min

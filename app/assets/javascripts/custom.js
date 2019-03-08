@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  $('.parsley-validate').parsley();
   //-initialize the javascript
   App.init();
   App.pageCalendar();

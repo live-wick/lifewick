@@ -8,16 +8,6 @@ Rails.application.routes.draw do
     passwords: 'users/passwords'
   }
 
-  # devise_scope :user do
-  #   authenticated :user do
-  #     root 'home#index', as: :authenticated_root
-  #   end
-
-  #   unauthenticated do
-  #     root 'users/sessions#new', as: :unauthenticated_root
-  #   end
-  # end
-
   scope module: :api, defaults: { format: :json }, path: 'api' do
     scope module: :v1 do
 

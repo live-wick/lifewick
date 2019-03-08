@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <% unless ((params[:controller] == 'users/sessions') || (params[:controller] == 'users/registrations')) %>
+    <% if  user_signed_in? %>
       <%= render partial: "shared/header" %>
     <% end %>
     <%= yield %>

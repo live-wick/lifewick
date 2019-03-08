@@ -2,13 +2,16 @@
   <div class="main-content container-fluid">
     <div class="splash-container">
       <div class="card card-border-color card-border-color-primary">
-        <div class="card-header login-header m-0"><img src="assets/images/logo-2.png" alt="logo"><span class="splash-description">Forgot your password?</span></div>
+        <div class="card-header login-header m-0">
+          <%= image_tag 'logo-2.png' %>
+          <span class="splash-description">Forgot your password?</span>
+        </div>
         <div class="card-body">
-            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "parsley-validate" }) do |f| %>
               <%= devise_error_messages! %>
               <p>Don't worry, we'll send you an email to reset your password.</p>
               <div class="form-group pt-4">
-                <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "form-control" %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "form-control", data: {"parsley-required": true, "parsley-type": "email"} %>
               </div>
               <p class="pt-1 pb-4">Don't remember your email? <a href="#">Contact Support</a>.</p>
               <div class="form-group pt-1">
