@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <% unless ((params[:controller] == 'api/v1/users/sessions') || (params[:controller] == 'api/v1/users/registrations')) %>
+    <% unless ((params[:controller] == 'users/sessions') || (params[:controller] == 'users/registrations')) %>
       <%= render partial: "shared/header" %>
     <% end %>
     <%= yield %>

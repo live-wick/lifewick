@@ -2,15 +2,11 @@
 #
 # Table name: attachments
 #
-#  id                :bigint(8)        not null, primary key
-#  description       :text
-#  file_content_type :string
-#  file_file_name    :string
-#  file_file_size    :integer
-#  file_updated_at   :datetime
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  strand_id         :bigint(8)
+#  id          :bigint(8)        not null, primary key
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  strand_id   :bigint(8)
 #
 # Indexes
 #

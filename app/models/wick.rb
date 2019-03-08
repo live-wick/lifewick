@@ -21,7 +21,7 @@ class Wick < ApplicationRecord
   belongs_to :user, optional: true
 
  	has_many :strands, dependent: :destroy
- 	has_many :shares, as: :shareable
+ 	has_many :shares, as: :shareable, dependent: :destroy
 
   def strands_count
     self.strands.count

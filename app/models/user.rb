@@ -31,10 +31,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 	has_many :handshakes
-	has_many :friends, :through => :handshakes
-	has_many :shares
-	has_many :receivers, :through => :shares
-	has_many :senders, :through => :shares
+	has_many :friends, :through => :handshakes, dependent: :destroy
+	has_many :shares, dependent: :destroy
+	has_many :receivers, :through => :shares, dependent: :destroy
+	has_many :senders, :through => :shares, dependent: :destroy
 	has_many :wicks, dependent: :destroy
 
 	after_create :create_wick

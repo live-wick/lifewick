@@ -1,11 +1,29 @@
 Rails.application.routes.draw do
   use_doorkeeper
+
+
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    passwords: 'users/passwords'
+  }
+
+  # devise_scope :user do
+  #   authenticated :user do
+  #     root 'home#index', as: :authenticated_root
+  #   end
+
+  #   unauthenticated do
+  #     root 'users/sessions#new', as: :unauthenticated_root
+  #   end
+  # end
+
   scope module: :api, defaults: { format: :json }, path: 'api' do
     scope module: :v1 do
 
-      devise_for :users, controllers: {
-           registrations: 'api/v1/users/registrations',
-       }, skip: [:sessions, :password]
+      # devise_for :users, controllers: {
+      #      registrations: 'api/v1/users/registrations',
+      #  }, skip: [:sessions, :password]
 
       resources :wicks, only: :create do
         collection do
@@ -33,8 +51,7 @@ Rails.application.routes.draw do
   # end
 
   devise_scope :user do
-    root to: "api/v1/users/sessions#new"
+    root to: "users/sessions#new"
   end
-  # root to: "api/v1/users/sessions#new"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
