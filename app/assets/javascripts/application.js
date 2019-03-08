@@ -11,18 +11,20 @@
 // about supported directives.
 //
 
-//= require jquery3
+//= require jquery
 //= require popper
+//= require jquery-ui
+//= require rails-ujs
 //= require parsley
 //= require bootstrap
 //= require perfect-scrollbar.min
 //= require lib/bootstrap/dist/js/bootstrap.bundle.min
 //= require app
-//= require jquery_ujs
 //= require app-dashboard
 //= require jquery-scrollbar
-//= require moment.min
-//= require fullcalendar.min
+//= require moment 
+//= require fullcalendar
+//= require fullcalendar/locale-all
 //= require app-page-calendar
 //= require activestorage
 //= require font_awesome5

@@ -1,8 +1,9 @@
 <nav class="navbar navbar-expand fixed-top be-top-header">
   <div class="container-fluid">
-    <div class="be-navbar-header"><a class="navbar-brand" href="index.html">
-      <%= image_tag 'logo-2.png' %>
-    </a>
+    <div class="be-navbar-header">
+      <%= link_to user_signed_in? ? user_dashboard_path(current_user) : root_path, class: "navbar-brand" do %>
+        <%= image_tag 'logo-2.png' %>
+      <% end %>
     </div>
 
     <div class="be-right-navbar">

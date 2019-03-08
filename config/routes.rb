@@ -36,6 +36,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, only: :dashboard do
+    get :dashboard
+  end
+
+
   # devise_scope :user do
   #   match "/users/sign_in" => "api/v1/users/sessions#new"
   # end

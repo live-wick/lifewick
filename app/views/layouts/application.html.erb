@@ -10,9 +10,11 @@
   </head>
 
   <body>
-    <% if  user_signed_in? %>
-      <%= render partial: "shared/header" %>
-    <% end %>
-    <%= yield %>
+    <div class="be-wrapper be-color-header be-fixed-sidebar">
+      <% if  user_signed_in? %>
+        <%= render partial: "shared/header" %>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>

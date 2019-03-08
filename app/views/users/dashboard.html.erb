@@ -1,0 +1,149 @@
+<div class="be-left-sidebar">
+  <div class="left-sidebar-wrapper"><a class="left-sidebar-toggle" href="#">Dashboard</a>
+    <div class="left-sidebar-spacer">
+      <div class="left-sidebar-scroll">
+        <div class="left-sidebar-content">
+          <ul class="sidebar-elements">
+            <li class="divider">MY WICK</li>
+            <li class="parent open"><a href="#"><i class="fas fa-bars"></i><span> Home</span></a>
+              <ul class="sub-menu">
+                
+                <li>
+                  <a href="ui-cards.html">
+                    <span class="badge badge-primary float-right">2</span>
+                    Family
+                  </a>
+                </li>
+                <li>
+                  <a href="ui-cards.html">
+                    <span class="badge badge-primary float-right">14</span>
+                    Vacation 2014
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="divider">SHARED WICKS</li>
+            <li>
+              <a href="#">
+                <span class="badge badge-primary float-right mt-2">2</span>
+                Ladner Bowling Club
+              </a>
+            </li>
+           <li>
+            <a href="#">
+              <span class="badge badge-primary float-right mt-2">14</span>
+              Gless Club
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="badge badge-primary float-right mt-2">2</span>
+              ACME Dentures Corp
+            </a>
+          </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="progress-widget">
+      <div class="progress-data"><span class="progress-value">60%</span><span class="name">Current Project</span></div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-primary" style="width: 60%;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="be-content">
+  
+  <div class="main-content container-fluid pt-1">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="row full-calendar calendarShow">
+          <div class="col-md-12">
+            <div class="card card-fullcalendar">
+              <div class="card-body">
+                <div id="calendar"></div>
+              </div>
+              <div class="show-calendar text-center" id="show">
+                  <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card ">
+              <div class="twitter-box card-body pl-2 pr-2 pb-0">
+                <div class="heading-bar">
+                  <div class="float-left">
+                    <i class="fab fa-twitter text-primary"></i> 3:14pm
+                  </div>
+                  <div class="float-right">
+                    <div class="float-left mr-2 mt-1">
+                      <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                          <span class="fas fa-plus"></span></a>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                          <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <div class="twite-image float-left mr-2">
+                      <%= image_tag 'avatar.png' %>
+                    </div>
+                    <div class="float-left  mt-1">
+                      <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                          <span class="icon fas fa-bars"></span></a>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                          <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>  
+                </div>
+                <div class="clearfix"></div>
+                <div>
+                  <p>It's not too late to be a part of the most Tweeted-about show on Twitter. Winter is coming. April 2019.</p>
+                </div>
+                <div class="card-header-divider m-0 pb-0"></div>
+                <div class="text-right pt-1 pb-1">
+                  Accept this strand yo your wick?
+                  <button class="btn btn-success btn-xs">Accept</button>
+                  <button class="btn btn-danger btn-xs">Ignore</button>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+        </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="card fullcalendar-external-events d-none">
+          <div class="card-header card-header-divider">Draggable Events</div>
+          <div class="card-body">
+            <div id="external-events">
+              <div class="fc-event">My Event 1</div>
+              <div class="fc-event">My Event 2</div>
+              <div class="fc-event">My Event 3</div>
+              <div class="fc-event">My Event 4</div>
+              <div class="fc-event">My Event 5</div>
+              <p>
+                <input id="drop-remove" type="checkbox">
+                <label for="drop-remove">remove after drop</label>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
