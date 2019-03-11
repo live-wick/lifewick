@@ -24,6 +24,7 @@ gem 'aws-sdk', '~> 3'
 gem 'swagger-docs'
 gem 'font_awesome5_rails'
 gem "parsley-rails"
+gem 'will_paginate', '~> 3.1.0'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 

@@ -1,3 +1,4 @@
+require 'will_paginate/array'
 class Api::V1::StrandsController < Api::V1::BaseController
 
 
@@ -100,13 +101,17 @@ class Api::V1::StrandsController < Api::V1::BaseController
     wick_ids = current_resource_owner.wicks.pluck(:id)
     user_created_strands = Strand.where(wick_id: wick_ids).to_a
     followed_strands = Share.followed_user_strands(current_resource_owner.id).map(&:shareable)
+    page = params[:page].present? ? params[:page] : "1"
+    per_page = 10
     @all_strands = (user_created_strands + followed_strands).uniq.sort_by(&:created_at).reverse!
+    total_pages = @all_strands.count.zero? ? 1 : (@all_strands.count / per_page.to_f).ceil
+    @all_strands = @all_strands.paginate(page: page, per_page: per_page)
     # @all_strands = Strand.all.order('created_at DESC')
     if @all_strands.present?
       results = []
       @all_strands.each do |strand|
         attachments = strand.attachments.map{|att| url_for(att)}
-        results << strand.as_json.merge!(files: attachments).merge!(shared_with_users: strand.shares.map(&:receiver))
+        results << strand.as_json.merge!(page: page, total_pages: total_pages).merge!(files: attachments).merge!(shared_with_users: strand.shares.map(&:receiver))
       end
       render json: {results: results }, status: 200
     else
