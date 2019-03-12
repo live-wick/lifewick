@@ -49,6 +49,13 @@
               "type": "string",
               "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
               "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "page",
+              "type": "string",
+              "description": "Page No",
+              "required": false
             }
           ],
           "nickname": "Api::V1::Strands#get_all_strands",
@@ -158,6 +165,13 @@
               "name": "remind_me_on",
               "type": "string",
               "description": "Remind me on",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "is_event",
+              "type": "boolean",
+              "description": "Is Event",
               "required": false
             },
             {
@@ -282,6 +296,13 @@
               "name": "remind_me_on",
               "type": "string",
               "description": "Remind me on",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "is_event",
+              "type": "boolean",
+              "description": "Is Event",
               "required": false
             },
             {

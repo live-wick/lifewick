@@ -12,6 +12,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
     param :query, "registration[password]", :string, :required, 'Password'
 
   end
+
+  swagger_api :update do |api| 
+    summary 'Account Update'
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+    param :query, "registration[first_name]", :string, :optioanl, 'First Name'
+    param :query, "registration[last_name]", :string, :optioanl, 'Last Name'
+    param :query, "registration[email]", :string, :optioanl, 'Email Address'
+    param :query, "registration[alias]", :string, :optioanl, 'unique Alias'
+    param :query, "registration[mobile]", :string, :optioanl, 'Mobile no.'
+    param :query, "registration[current_password]", :string, :optioanl, 'Current Password'
+    param :query, "registration[password]", :string, :optioanl, 'New Password'
+    param :query, "registration[birth_date]", :string, :optioanl, 'Birth Date'
+    
+
+  end
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 

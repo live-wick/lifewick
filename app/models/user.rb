@@ -38,6 +38,8 @@ class User < ApplicationRecord
 	has_many :senders, :through => :shares, dependent: :destroy
 	has_many :wicks, dependent: :destroy
 
+
+  validates_uniqueness_of :alias
 	after_create :create_wick
 
 	def create_wick
