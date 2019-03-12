@@ -2,7 +2,9 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :html, :json
-  skip_before_action :verify_authenticity_token, only: :create
+  skip_before_action :authenticate_scope!, only: [:edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token, only: [:create, :update]
+
   swagger_controller :registrations, 'User Sign Up'
   swagger_api :create do |api| 
     summary 'Sign Up'
@@ -59,9 +61,31 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    self.resource = resource_class.to_adapter.get!(send(:"current_resource_owner").to_key)
+    prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+
+    resource_updated = update_resource(resource, configure_account_update_params)
+    yield resource if block_given?
+    if resource_updated
+      # set_flash_message_for_update(resource, prev_unconfirmed_email)
+      bypass_sign_in resource, scope: resource_name #if sign_in_after_change_password?
+
+      respond_to do |format|
+        format.json { 
+          render json: resource # , location: after_sign_up_path_for(resource)
+        }
+        format.html {respond_with resource, location: after_update_path_for(resource)}
+      end
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      respond_to do |format|
+        format.json { render json: { error_messages: resource.errors.full_messages.join(', ') }, status: 422 }
+        format.html {respond_with resource}
+      end
+    end
+  end
 
   # DELETE /resource
   # def destroy
@@ -90,9 +114,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+  def configure_account_update_params
+    if request.content_type == 'application/json'
+      params[:registration].permit(:email, :password, :birth_date, :first_name, :last_name, :alias, :current_password, :password, :mobile)
+    else
+      params[:user].permit(:email, :password, :birth_date, :first_name, :last_name, :alias, :current_password, :password, :mobile)
+    end
+  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)

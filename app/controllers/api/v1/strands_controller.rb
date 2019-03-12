@@ -20,6 +20,7 @@ class Api::V1::StrandsController < Api::V1::BaseController
     param :query, "latitude", :string, :optional, 'Latitude'
     param :query, "longitude", :string, :optional, 'Longitude'
     param :query, "remind_me_on", :string, :optional, 'Remind me on'
+    param :query, "is_event", :boolean, :optional, 'Is Event'
     param :query, "wick_id", :string, :required, 'Wick ID'
 
   end
@@ -28,6 +29,7 @@ class Api::V1::StrandsController < Api::V1::BaseController
   swagger_api :get_all_strands do |api| 
     summary "Get User's All Strands"
     param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+    param :query, "page", :string, :optional, 'Page No'
   end
 
   swagger_api :add_attachments do |api| 
@@ -54,6 +56,7 @@ class Api::V1::StrandsController < Api::V1::BaseController
     param :query, "latitude", :string, :optional, 'Latitude'
     param :query, "longitude", :string, :optional, 'Longitude'
     param :query, "remind_me_on", :string, :optional, 'Remind me on'
+    param :query, "is_event", :boolean, :optional, 'Is Event'
     param :query, "wick_id", :string, :required, 'Wick ID'
   end
 

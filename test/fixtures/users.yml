@@ -9,6 +9,7 @@
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string
 #  last_name              :string
+#  mobile                 :string
 #  open                   :boolean
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
