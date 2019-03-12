@@ -76,7 +76,8 @@ class Api::V1::StrandsController < Api::V1::BaseController
       user_id: current_resource_owner.id,
       wick_name: wick.name,
       is_public: params[:shared_strand_users].present? ? false : true,
-      is_private: params[:shared_strand_users].present? ? true : false
+      is_private: params[:shared_strand_users].present? ? true : false,
+      is_event: params[:is_event].present? ? params[:is_event] : false
     )
     if @strand.save
       shared_strand_user_ids = params[:shared_strand_users].present? ? params[:shared_strand_users] : User.pluck(:id)

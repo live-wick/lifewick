@@ -7,6 +7,7 @@
 #  all_day        :boolean          default(FALSE)
 #  description    :text
 #  end_date       :datetime
+#  is_event       :boolean          default(FALSE)
 #  is_private     :boolean          default(FALSE)
 #  is_public      :boolean          default(TRUE)
 #  latitude       :string
