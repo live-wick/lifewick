@@ -37,6 +37,7 @@ class User < ApplicationRecord
 	has_many :receivers, :through => :shares, dependent: :destroy
 	has_many :senders, :through => :shares, dependent: :destroy
 	has_many :wicks, dependent: :destroy
+  has_many :additional_emails, dependent: :destroy
 
 
   validates_uniqueness_of :alias, :allow_blank => true, :allow_nil => true
