@@ -16,14 +16,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   swagger_api :update do |api| 
     summary 'Account Update'
     param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
-    param :query, "registration[first_name]", :string, :optioanl, 'First Name'
-    param :query, "registration[last_name]", :string, :optioanl, 'Last Name'
-    param :query, "registration[email]", :string, :optioanl, 'Email Address'
-    param :query, "registration[alias]", :string, :optioanl, 'unique Alias'
-    param :query, "registration[mobile]", :string, :optioanl, 'Mobile no.'
-    param :query, "registration[current_password]", :string, :optioanl, 'Current Password'
-    param :query, "registration[password]", :string, :optioanl, 'New Password'
-    param :query, "registration[birth_date]", :string, :optioanl, 'Birth Date'
+    param :query, "registration[first_name]", :string, :optional, 'First Name'
+    param :query, "registration[last_name]", :string, :optional, 'Last Name'
+    param :query, "registration[email]", :string, :optional, 'Email Address'
+    param :query, "registration[alias]", :string, :optional, 'unique Alias'
+    param :query, "registration[mobile]", :string, :optional, 'Mobile no.'
+    param :query, "registration[current_password]", :string, :optional, 'Current Password'
+    param :query, "registration[password]", :string, :optional, 'New Password'
+    param :query, "registration[birth_date]", :string, :optional, 'Birth Date'
     
 
   end
@@ -130,7 +130,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    if request.content_type == 'application/json'
+    if request.content_type == 'application/json' || request.content_type == 'text/plain'
       params[:registration].permit(:email, :password, :birth_date, :first_name, :last_name, :alias, :current_password, :password, :mobile)
     else
       params[:user].permit(:email, :password, :birth_date, :first_name, :last_name, :alias, :current_password, :password, :mobile)

@@ -39,7 +39,7 @@ class User < ApplicationRecord
 	has_many :wicks, dependent: :destroy
 
 
-  validates_uniqueness_of :alias
+  validates_uniqueness_of :alias, :allow_blank => true, :allow_nil => true
 	after_create :create_wick
 
 	def create_wick
