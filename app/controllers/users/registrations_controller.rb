@@ -24,6 +24,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     param :query, "registration[current_password]", :string, :optional, 'Current Password'
     param :query, "registration[password]", :string, :optional, 'New Password'
     param :query, "registration[birth_date]", :string, :optional, 'Birth Date'
+    param :query, "additional_emails", :array, :optional, 'Additional Emails'
     
 
   end
@@ -99,8 +100,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       bypass_sign_in resource, scope: resource_name #if sign_in_after_change_password?
       respond_to do |format|
         format.json { 
-          render :json => resource, :include => {:additional_emails => {:only => :email}}
-          # render json: resource # , location: after_sign_up_path_for(resource)
+          # render :json => resource, :include => {:additional_emails => {:only => :email}}
+          render json: resource.as_json.merge(additional_emails: resource.additional_emails.pluck(:email)) # , location: after_sign_up_path_for(resource)
         }
         format.html {respond_with resource, location: after_update_path_for(resource)}
       end

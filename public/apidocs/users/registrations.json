@@ -72,6 +72,13 @@
               "type": "string",
               "description": "Birth Date",
               "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "additional_emails",
+              "type": "array",
+              "description": "Additional Emails",
+              "required": false
             }
           ],
           "nickname": "Users::Registrations#update",

@@ -36,6 +36,32 @@
           "method": "get"
         }
       ]
+    },
+    {
+      "path": "/api/users/add_avatar.json",
+      "operations": [
+        {
+          "summary": "Add User Avatar",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "avatar",
+              "type": "file",
+              "description": "Avatar",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Users#add_avatar",
+          "method": "post"
+        }
+      ]
     }
   ],
   "authorizations": null
