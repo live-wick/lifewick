@@ -62,6 +62,25 @@
           "method": "post"
         }
       ]
+    },
+    {
+      "path": "/api/users/get_user.json",
+      "operations": [
+        {
+          "summary": "Get User Info",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Users#get_user",
+          "method": "get"
+        }
+      ]
     }
   ],
   "authorizations": null
