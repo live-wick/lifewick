@@ -32,6 +32,7 @@ Rails.application.routes.draw do
         collection do
           get :fetch_users
           post :add_avatar
+          get :get_user
         end
 
       end

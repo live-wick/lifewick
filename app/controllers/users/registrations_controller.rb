@@ -95,13 +95,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource_updated
 
       resource.additional_emails.create(additional_emails) if params[:additional_emails].present?
+      avatar = url_for(resource.avatar) if resource.avatar.attached?
 
       # set_flash_message_for_update(resource, prev_unconfirmed_email)
       bypass_sign_in resource, scope: resource_name #if sign_in_after_change_password?
       respond_to do |format|
         format.json { 
-          # render :json => resource, :include => {:additional_emails => {:only => :email}}
-          render json: resource.as_json.merge(additional_emails: resource.additional_emails.pluck(:email)) # , location: after_sign_up_path_for(resource)
+          render json: resource.as_json.merge(additional_emails: resource.additional_emails.pluck(:email)).merge(avatar: avatar) # , location: after_sign_up_path_for(resource)
         }
         format.html {respond_with resource, location: after_update_path_for(resource)}
       end
