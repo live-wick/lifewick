@@ -33,6 +33,9 @@ Rails.application.routes.draw do
           get :fetch_users
           post :add_avatar
           get :get_user
+          post :send_friend_request
+          get :get_recieved_handshakes
+          put :accept_friend_request
         end
 
       end

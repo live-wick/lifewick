@@ -81,6 +81,77 @@
           "method": "get"
         }
       ]
+    },
+    {
+      "path": "/api/users/send_friend_request.json",
+      "operations": [
+        {
+          "summary": "Send Friend Request",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "email",
+              "type": "string",
+              "description": "Email",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Users#send_friend_request",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/users/get_recieved_handshakes.json",
+      "operations": [
+        {
+          "summary": "Get Received Handshakes",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Users#get_recieved_handshakes",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/users/accept_friend_request.json",
+      "operations": [
+        {
+          "summary": "Accept Friend Request",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "handshake_id",
+              "type": "integer",
+              "description": "Hand Shake ID",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Users#accept_friend_request",
+          "method": "put"
+        }
+      ]
     }
   ],
   "authorizations": null

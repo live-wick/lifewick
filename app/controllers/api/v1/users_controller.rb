@@ -21,6 +21,23 @@ class Api::V1::UsersController < Api::V1::BaseController
     param :query, "avatar", :file, :required, 'Avatar'
   end
 
+  swagger_api :send_friend_request do |api| 
+    summary 'Send Friend Request'
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+    param :query, "email", :string, :required, 'Email'
+  end
+
+  swagger_api :get_recieved_handshakes do |api| 
+    summary 'Get Received Handshakes'
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+  end
+
+  swagger_api :accept_friend_request do |api| 
+    summary 'Accept Friend Request'
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+    param :query, "handshake_id", :integer, :required, 'Hand Shake ID'
+  end
+
   def fetch_users
     if params[:email].present?
       @users = User.where(email: params[:email])
@@ -55,5 +72,48 @@ class Api::V1::UsersController < Api::V1::BaseController
     avatar = url_for(user.avatar) if user.avatar.attached?
     result = user.as_json.merge(additional_emails: additional_emails, avatar: avatar)
     render json: result
+  end
+
+  def send_friend_request
+    begin
+      sender = current_resource_owner
+      receiver = User.find_by(email: params[:email])
+      debugger
+      handshake = sender.send_friend_requests.new
+      handshake.receiver_id = receiver.id
+      handshake.notified = true
+      handshake.status = 0
+      if handshake.save
+        render json: {results: handshake, message: "Friend request is sent and approval is pending" }, status: 200
+      else
+        render json: {message: handshake.errors.full_messages.join(', ') }, status: 401
+      end
+    rescue Exception => e
+      render json: {message: e}, status: 500
+    end
+  end
+
+  def get_recieved_handshakes
+    begin
+      sender = current_resource_owner
+      handshakes = sender.received_friend_requests
+      render json: {results: handshakes}, status: 200
+    rescue Exception => e
+      render json: {message: e}, status: 500
+    end
+  end
+
+  def accept_friend_request
+    begin
+      sender = current_resource_owner
+      handshake = sender.received_friend_requests.find(params[:handshake_id])
+      if handshake.update!(result_date: DateTime.now, status: 1)
+        render json: {results: handshake, message: "Friend request is accepted"}, status: 200
+    else
+      render json: {message: handshake.errors.full_messages.join(', ') }, status: 401
+    end
+    rescue Exception => e
+      render json: {message: e}, status: 500
+    end
   end
 end

@@ -31,11 +31,17 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-	has_many :handshakes
-	has_many :friends, :through => :handshakes, dependent: :destroy
-	has_many :shares, dependent: :destroy
+	
+  #  has_many :handshakes, dependent: :destroy
+  # has_many :friends, :through => :handshakes, dependent: :destroy
+
+	has_many :send_friend_requests, class_name: "Handshake", foreign_key: 'sender_id', dependent: :destroy
+  has_many :received_friend_requests, class_name: "Handshake", foreign_key: 'receiver_id', dependent: :destroy
+
+  has_many :shares, dependent: :destroy
 	has_many :receivers, :through => :shares, dependent: :destroy
 	has_many :senders, :through => :shares, dependent: :destroy
+
 	has_many :wicks, dependent: :destroy
   has_many :additional_emails, dependent: :destroy
   has_one_attached :avatar, dependent: :destroy
