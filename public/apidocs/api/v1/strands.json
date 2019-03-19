@@ -317,6 +317,32 @@
           "method": "patch"
         }
       ]
+    },
+    {
+      "path": "/api/strands/{id}.json",
+      "operations": [
+        {
+          "summary": "Delete Strand",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Strand ID",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Strands#destroy",
+          "method": "delete"
+        }
+      ]
     }
   ],
   "authorizations": null

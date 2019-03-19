@@ -60,6 +60,12 @@ class Api::V1::StrandsController < Api::V1::BaseController
     param :query, "wick_id", :string, :required, 'Wick ID'
   end
 
+  swagger_api :destroy do |api| 
+    summary "Delete Strand"
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+    param :path, "id", :integer, :required, 'Strand ID'
+  end
+
   def create
     wick = Wick.find(params[:wick_id])
     @strand = wick.strands.new(
@@ -177,8 +183,19 @@ class Api::V1::StrandsController < Api::V1::BaseController
       render json: { message: @strand.errors.full_messages.join(', '), result: [] }, status: 401
 
     end
+  end
 
-
+  def destroy
+    begin
+      @strand = Strand.find(params[:id])
+      if @strand.destroy
+        render json: {result: @strand, message: "Strand is successfully deleted" }, status: 200
+      else
+        render json: { message: @strand.errors.full_messages.join(', ') }, status: 401      
+      end
+    rescue Exception => e
+      render json: {message: e}, status: 500
+    end
 
   end
 
