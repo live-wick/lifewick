@@ -83,7 +83,8 @@ class Api::V1::UsersController < Api::V1::BaseController
       handshake.notified = true
       handshake.status = 0
       if handshake.save
-        render json: {results: handshake, message: "Friend request is sent and approval is pending" }, status: 200
+        result = handshake.as_json.except('created_at', 'updated_at', 'sender_id', 'receiver_id').merge(sender: handshake.sender_request_user, receiver: handshake.receiver_request_user)
+        render json: {results: result, message: "Friend request is sent and approval is pending" }, status: 200
       else
         render json: {message: handshake.errors.full_messages.join(', ') }, status: 401
       end
@@ -94,9 +95,13 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def get_recieved_handshakes
     begin
+      results = []
       sender = current_resource_owner
       handshakes = sender.received_friend_requests
-      render json: {results: handshakes}, status: 200
+      handshakes.each do |handshake|
+        results << handshake.as_json.except('created_at', 'updated_at', 'sender_id', 'receiver_id').merge(sender: handshake.sender_request_user, receiver: handshake.receiver_request_user)
+      end
+      render json: {results: results}, status: 200
     rescue Exception => e
       render json: {message: e}, status: 500
     end
