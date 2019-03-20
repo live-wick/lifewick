@@ -78,7 +78,6 @@ class Api::V1::UsersController < Api::V1::BaseController
     begin
       sender = current_resource_owner
       receiver = User.find_by(email: params[:email])
-      debugger
       handshake = sender.send_friend_requests.new
       handshake.receiver_id = receiver.id
       handshake.notified = true
