@@ -152,6 +152,32 @@
           "method": "put"
         }
       ]
+    },
+    {
+      "path": "/api/users/reject_friend_request.json",
+      "operations": [
+        {
+          "summary": "Reject Friend Request",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "handshake_id",
+              "type": "integer",
+              "description": "Hand Shake ID",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Users#reject_friend_request",
+          "method": "put"
+        }
+      ]
     }
   ],
   "authorizations": null
