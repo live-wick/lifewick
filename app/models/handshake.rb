@@ -20,5 +20,7 @@ class Handshake < ApplicationRecord
   belongs_to :sender_request_user, class_name: "User", foreign_key: 'sender_id'
   belongs_to :receiver_request_user, class_name: "User", foreign_key: 'receiver_id'
 
+  scope :valid_handshakes, -> {where.not(status: -1)}
+
 
 end
