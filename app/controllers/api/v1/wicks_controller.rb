@@ -22,14 +22,14 @@ class Api::V1::WicksController < Api::V1::BaseController
     summary 'Share Handshake Wick'
     param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
     param :query, "handshake_id", :integer, :required, 'Handshake ID'
-    param :query, "wick_id", :integer, :required, 'Wick ID'
+    param :path, "wick_id", :integer, :required, 'Wick ID'
   end
 
   swagger_api :unshare_handshake_wick do |api|
     summary 'Unshare Handshake Wick'
     param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
     param :query, "handshake_id", :integer, :required, 'Handshake ID'
-    param :query, "wick_id", :integer, :required, 'Wick ID'
+    param :path, "wick_id", :integer, :required, 'Wick ID'
   end
 
 	def create

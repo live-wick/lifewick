@@ -70,7 +70,7 @@
               "required": true
             },
             {
-              "paramType": "query",
+              "paramType": "path",
               "name": "wick_id",
               "type": "integer",
               "description": "Wick ID",
@@ -103,7 +103,7 @@
               "required": true
             },
             {
-              "paramType": "query",
+              "paramType": "path",
               "name": "wick_id",
               "type": "integer",
               "description": "Wick ID",
