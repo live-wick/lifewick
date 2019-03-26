@@ -12,6 +12,12 @@ class Api::V1::WicksController < Api::V1::BaseController
     param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
   end
 
+  swagger_api :get_handshake_wicks do |api|
+    summary 'Get Handshake Wicks'
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+    param :query, "handshake_id", :integer, :required, 'Handshake ID'
+  end
+
 	def create
 		@wick = current_resource_owner.wicks.new(name: params[:name])
 		if @wick.save
@@ -39,5 +45,22 @@ class Api::V1::WicksController < Api::V1::BaseController
     else
       render json: { message: "No Wicks found", result: [] }, status: 401
     end
+  end
+
+  def get_handshake_wicks
+    wicks = current_resource_owner.wicks
+    handshake = Handshake.find(params[:handshake_id])
+    opponent_id = current_resource_owner.id == handshake.sender_id ? handshake.receiver_id : handshake.sender_id
+    results = []
+    wicks.each do |wick|
+      if wick.shares.find_by(receiver_id: opponent_id).present?
+        results << wick.as_json.merge(is_shared: true)
+      else
+        results << wick.as_json.merge(is_shared: false)
+      end
+    end
+
+    render json: {results: results }, status: 200
+
   end
 end

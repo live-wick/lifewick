@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :wicks, only: :create do
         collection do
           get :get_user_all_wicks
+          get :get_handshake_wicks
         end
       end
 

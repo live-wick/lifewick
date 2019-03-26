@@ -24,6 +24,32 @@
       ]
     },
     {
+      "path": "/api/wicks/get_handshake_wicks.json",
+      "operations": [
+        {
+          "summary": "Get Handshake Wicks",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "handshake_id",
+              "type": "integer",
+              "description": "Handshake ID",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Wicks#get_handshake_wicks",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/wicks.json",
       "operations": [
         {
