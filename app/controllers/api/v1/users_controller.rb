@@ -109,7 +109,7 @@ class Api::V1::UsersController < Api::V1::BaseController
       sender = current_resource_owner
       handshakes = sender.received_friend_requests.valid_handshakes
       handshakes.each do |handshake|
-        results << handshake.as_json.except('created_at', 'updated_at', 'sender_id', 'receiver_id').merge(sender: handshake.sender_request_user, receiver: handshake.receiver_request_user)
+        results << handshake.as_json.except('created_at', 'updated_at', 'sender_id', 'receiver_id').merge(user: handshake.sender_request_user)
       end
       render json: {results: results}, status: 200
     rescue Exception => e
