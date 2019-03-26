@@ -18,6 +18,20 @@ class Api::V1::WicksController < Api::V1::BaseController
     param :query, "handshake_id", :integer, :required, 'Handshake ID'
   end
 
+  swagger_api :share_handshake_wick do |api|
+    summary 'Share Handshake Wick'
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+    param :query, "handshake_id", :integer, :required, 'Handshake ID'
+    param :query, "wick_id", :integer, :required, 'Wick ID'
+  end
+
+  swagger_api :unshare_handshake_wick do |api|
+    summary 'Unshare Handshake Wick'
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+    param :query, "handshake_id", :integer, :required, 'Handshake ID'
+    param :query, "wick_id", :integer, :required, 'Wick ID'
+  end
+
 	def create
 		@wick = current_resource_owner.wicks.new(name: params[:name])
 		if @wick.save
@@ -63,4 +77,30 @@ class Api::V1::WicksController < Api::V1::BaseController
     render json: {results: results }, status: 200
 
   end
+
+  def share_handshake_wick
+    handshake = Handshake.find(params[:handshake_id])
+    opponent_id = current_resource_owner.id == handshake.sender_id ? handshake.receiver_id : handshake.sender_id
+    wick = current_resource_owner.wicks.find(params[:wick_id])
+    unless wick.shares.find_by(receiver_id: opponent_id).present?
+      share = wick.shares.create(sender_id: current_resource_owner.id, receiver_id: opponent_id)
+      render json: {results: share, message: "Wick is shared successfully" }, status: 200
+    else
+      render json: {results: [], message: "Wick is already shared with the user" }, status: 422
+    end
+  end
+
+  def unshare_handshake_wick
+    handshake = Handshake.find(params[:handshake_id])
+    opponent_id = current_resource_owner.id == handshake.sender_id ? handshake.receiver_id : handshake.sender_id
+    wick = current_resource_owner.wicks.find(params[:wick_id])
+    share_wick = wick.shares.find_by(receiver_id: opponent_id)
+    if share_wick.present?
+      share = share_wick.destroy
+      render json: {results: [], message: "Wick is un shared successfully" }, status: 200
+    else
+      render json: {results: [], message: "Wick is already not shared with the user" }, status: 422
+    end
+  end
+
 end

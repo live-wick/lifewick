@@ -20,6 +20,8 @@ Rails.application.routes.draw do
           get :get_user_all_wicks
           get :get_handshake_wicks
         end
+        post :share_handshake_wick
+        post :unshare_handshake_wick
       end
 
       resources :strands, only: [:create, :update, :destroy] do

@@ -50,6 +50,72 @@
       ]
     },
     {
+      "path": "/api/wicks/{wick_id}/share_handshake_wick.json",
+      "operations": [
+        {
+          "summary": "Share Handshake Wick",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "handshake_id",
+              "type": "integer",
+              "description": "Handshake ID",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "wick_id",
+              "type": "integer",
+              "description": "Wick ID",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Wicks#share_handshake_wick",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/wicks/{wick_id}/unshare_handshake_wick.json",
+      "operations": [
+        {
+          "summary": "Unshare Handshake Wick",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "handshake_id",
+              "type": "integer",
+              "description": "Handshake ID",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "wick_id",
+              "type": "integer",
+              "description": "Wick ID",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Wicks#unshare_handshake_wick",
+          "method": "post"
+        }
+      ]
+    },
+    {
       "path": "/api/wicks.json",
       "operations": [
         {
