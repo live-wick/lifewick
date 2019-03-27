@@ -197,7 +197,7 @@ class Api::V1::UsersController < Api::V1::BaseController
         handshakes = user.received_friend_requests.where(sender_id: current_resource_owner.id).where.not(status: 1)
         results << user.as_json.merge!(avatar: avatar).merge!(status: handshakes.present? ? handshakes.first.status : nil)
       end
-      render json: {results: results }, status: 200
+      render json: {results: results, message: "" }, status: 200
     else
       render json: { message: "No User found", results: [] }, status: 401
     end
