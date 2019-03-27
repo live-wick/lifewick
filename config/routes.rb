@@ -37,6 +37,7 @@ Rails.application.routes.draw do
           post :add_avatar
           get :get_user
           post :send_friend_request
+          post :cancel_friend_request
           get :get_recieved_handshakes
           put :accept_friend_request
           put :reject_friend_request

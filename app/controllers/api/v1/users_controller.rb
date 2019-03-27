@@ -103,6 +103,26 @@ class Api::V1::UsersController < Api::V1::BaseController
     end
   end
 
+  def cancel_friend_request
+    begin
+      sender = current_resource_owner
+      receiver = User.find_by(email: params[:email])
+      handshake = Handshake.find_by(sender_id: current_resource_owner.id, receiver_id: receiver.id)
+      if handshake.present?
+        if handshake.destroy
+          result = handshake.as_json.except('created_at', 'updated_at', 'sender_id', 'receiver_id').merge(sender: handshake.sender_request_user, receiver: handshake.receiver_request_user)
+          render json: {results: result, message: "Friend request is cancelled" }, status: 200
+        else
+          render json: {message: handshake.errors.full_messages.join(', ') }, status: 401
+        end
+      else
+        render json: {message: "No Handshake Found" }, status: 422
+      end
+    rescue Exception => e
+      render json: {message: e}, status: 500
+    end
+  end
+
   def get_recieved_handshakes
     begin
       results = []
