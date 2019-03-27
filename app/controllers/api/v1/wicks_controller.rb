@@ -97,7 +97,7 @@ class Api::V1::WicksController < Api::V1::BaseController
     share_wick = wick.shares.find_by(receiver_id: opponent_id)
     if share_wick.present?
       share = share_wick.destroy
-      render json: {results: [], message: "Wick is un shared successfully" }, status: 200
+      render json: {results: share, message: "Wick is un shared successfully" }, status: 200
     else
       render json: {results: [], message: "Wick is already not shared with the user" }, status: 422
     end
