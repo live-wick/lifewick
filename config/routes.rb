@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       resources :users, only: :fetch_users do
         collection do
           get :fetch_users
+          get :search_users_for_handshake
           post :add_avatar
           get :get_user
           post :send_friend_request

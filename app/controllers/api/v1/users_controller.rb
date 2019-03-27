@@ -9,6 +9,13 @@ class Api::V1::UsersController < Api::V1::BaseController
     param :query, "name", :string, :optional, 'User Full Name'
   end
 
+  swagger_api :search_users_for_handshake do |api| 
+    summary 'Search User by Email or Name'
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+    param :query, "email", :string, :optional, 'Email Address'
+    param :query, "name", :string, :optional, 'User Full Name'
+  end
+
   swagger_api :get_user do |api| 
     summary 'Get User Info'
     param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
@@ -171,6 +178,28 @@ class Api::V1::UsersController < Api::V1::BaseController
     end
     rescue Exception => e
       render json: {message: e}, status: 500
+    end
+  end
+
+  def search_users_for_handshake
+    if params[:email].present?
+      @users = User.where(email: params[:email])
+    end
+
+    if params[:name].present?
+      @users = @users.present? ? @users.search_by_full_name(params[:name]) :  User.search_by_full_name(params[:name])
+    end
+
+    if @users.present?
+      results = []
+      @users.each do |user|
+        avatar = url_for(user.avatar) if user.avatar.attached?
+        handshakes = user.received_friend_requests.where(sender_id: current_resource_owner.id).where.not(status: 1)
+        results << user.as_json.merge!(avatar: avatar).merge!(status: handshakes.present? ? handshakes.first.status : nil)
+      end
+      render json: {results: results }, status: 200
+    else
+      render json: { message: "No User found", results: [] }, status: 401
     end
   end
 end
