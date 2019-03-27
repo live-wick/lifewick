@@ -38,6 +38,39 @@
       ]
     },
     {
+      "path": "/api/users/search_users_for_handshake.json",
+      "operations": [
+        {
+          "summary": "Search User by Email or Name",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "email",
+              "type": "string",
+              "description": "Email Address",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "name",
+              "type": "string",
+              "description": "User Full Name",
+              "required": false
+            }
+          ],
+          "nickname": "Api::V1::Users#search_users_for_handshake",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/users/add_avatar.json",
       "operations": [
         {
