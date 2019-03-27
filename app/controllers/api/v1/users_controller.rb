@@ -105,7 +105,7 @@ class Api::V1::UsersController < Api::V1::BaseController
         handshake.notified = true
         handshake.status = 0
         if handshake.save
-          result = handshake.as_json.except('created_at', 'updated_at', 'sender_id', 'receiver_id').merge(user: handshake.sender_request_user)
+          result = handshake.as_json.except('created_at', 'updated_at', 'sender_id', 'receiver_id').merge(user: handshake.receiver_request_user)
           render json: {results: result, message: "Friend request is sent and approval is pending" }, status: 200
         else
           render json: {message: handshake.errors.full_messages.join(', ') }, status: 401
@@ -123,7 +123,7 @@ class Api::V1::UsersController < Api::V1::BaseController
       handshake = Handshake.find_by(sender_id: current_resource_owner.id, receiver_id: receiver.id)
       if handshake.present?
         if handshake.destroy
-          result = handshake.as_json.except('created_at', 'updated_at', 'sender_id', 'receiver_id').merge(user: handshake.sender_request_user)
+          result = handshake.as_json.except('created_at', 'updated_at', 'sender_id', 'receiver_id').merge(user: handshake.receiver_request_user)
           render json: {results: result, message: "Friend request is cancelled" }, status: 200
         else
           render json: {message: handshake.errors.full_messages.join(', ') }, status: 401
