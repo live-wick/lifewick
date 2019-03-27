@@ -27,6 +27,12 @@ class Api::V1::UsersController < Api::V1::BaseController
     param :query, "email", :string, :required, 'Email'
   end
 
+  swagger_api :cancel_friend_request do |api| 
+    summary 'Cancel Friend Request'
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+    param :query, "email", :string, :required, 'Email'
+  end
+
   swagger_api :get_recieved_handshakes do |api| 
     summary 'Get Received Handshakes'
     param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"

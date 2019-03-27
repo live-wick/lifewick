@@ -109,6 +109,32 @@
       ]
     },
     {
+      "path": "/api/users/cancel_friend_request.json",
+      "operations": [
+        {
+          "summary": "Cancel Friend Request",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "email",
+              "type": "string",
+              "description": "Email",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Users#cancel_friend_request",
+          "method": "post"
+        }
+      ]
+    },
+    {
       "path": "/api/users/get_recieved_handshakes.json",
       "operations": [
         {
