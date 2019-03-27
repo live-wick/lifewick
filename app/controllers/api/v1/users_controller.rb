@@ -110,7 +110,8 @@ class Api::V1::UsersController < Api::V1::BaseController
       handshakes = sender.received_friend_requests.valid_handshakes
       handshakes.each do |handshake|
         handshake_user = handshake.sender_request_user
-        user_result = handshake_user.avatar.attached? ? (handshake_user.as_json.merge(avatar: url_for(handshake_user.avatar))) : handshake_user
+        avatar = url_for(handshake_user.avatar) if handshake_user.avatar.attached?
+        user_result = handshake_user.as_json.merge(avatar: avatar)
         results << handshake.as_json.except('created_at', 'updated_at', 'sender_id', 'receiver_id').merge(user: user_result)
       end
       render json: {results: results}, status: 200
