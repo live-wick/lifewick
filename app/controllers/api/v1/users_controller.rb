@@ -153,7 +153,8 @@ class Api::V1::UsersController < Api::V1::BaseController
         handshake_user = handshake.sender_request_user
         avatar = url_for(handshake_user.avatar) if handshake_user.avatar.attached?
         user_result = handshake_user.as_json.merge(avatar: avatar)
-        results << handshake.as_json.except('created_at', 'updated_at', 'sender_id', 'receiver_id').merge(user: user_result)
+        shared_wicks = Share.where(shareable_type: 'Wick', sender_id: sender.id, receiver_id: handshake_user.id)
+        results << handshake.as_json.except('created_at', 'updated_at', 'sender_id', 'receiver_id').merge(user: user_result).merge(shared_wicks: shared_wicks)
       end
       render json: {results: results}, status: 200
     rescue Exception => e
