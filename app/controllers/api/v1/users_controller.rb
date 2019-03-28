@@ -202,7 +202,7 @@ class Api::V1::UsersController < Api::V1::BaseController
     if params[:email].present?
       @users = User.all_except(current_resource_owner).where(email: params[:email])
       @users = @users.select {|user| 
-        handshake = Handshake.find_by(sender_id: current_resource_owner, receiver_id: user.id)
+        handshake = Handshake.find_by(sender_id: current_resource_owner, receiver_id: user.id) || Handshake.find_by(sender_id: user.id, receiver_id: current_resource_owner.id)
         handshake.present? && handshake.status!=1 || !handshake.present?
       }
     end
