@@ -153,7 +153,7 @@ class Api::V1::UsersController < Api::V1::BaseController
         handshake_user = handshake.sender_request_user
         avatar = url_for(handshake_user.avatar) if handshake_user.avatar.attached?
         user_result = handshake_user.as_json.merge(avatar: avatar)
-        shared_wicks = Share.where(shareable_type: 'Wick', sender_id: sender.id, receiver_id: handshake_user.id)
+        shared_wicks = Share.where(shareable_type: 'Wick', sender_id: sender.id, receiver_id: handshake_user.id).map(&:shareable)
         results << handshake.as_json.except('created_at', 'updated_at', 'sender_id', 'receiver_id').merge(user: user_result).merge(shared_wicks: shared_wicks)
       end
       render json: {results: results}, status: 200
@@ -195,8 +195,7 @@ class Api::V1::UsersController < Api::V1::BaseController
       @users = User.all_except(current_resource_owner).where(email: params[:email])
       @users = @users.select {|user| 
         handshake = Handshake.find_by(sender_id: current_resource_owner, receiver_id: user.id)
-        handshake.present? && handshake.status!=1
-
+        handshake.present? && handshake.status!=1 || !handshake.present?
       }
     end
 
