@@ -59,11 +59,11 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def fetch_users
     if params[:email].present?
-      @users = User.where(email: params[:email])
+      @users = User.all_except(current_resource_owner).where(email: params[:email])
     end
 
     if params[:name].present?
-      @users = @users.present? ? @users.search_by_full_name(params[:name]) :  User.search_by_full_name(params[:name])
+      @users = @users.present? ? @users.search_by_full_name(params[:name]) :  User.all_except(current_resource_owner).search_by_full_name(params[:name])
     end
 
     if @users.present?
@@ -97,8 +97,16 @@ class Api::V1::UsersController < Api::V1::BaseController
     begin
       sender = current_resource_owner
       receiver = User.find_by(email: params[:email])
-      if (Handshake.find_by(sender_id: current_resource_owner.id, receiver_id: receiver.id)).present?
+      handshake = Handshake.find_by(sender_id: current_resource_owner.id, receiver_id: receiver.id)
+      if handshake.present? && handshake.status != -1
         render json: {message: "Request Already sent" }, status: 422
+      elsif handshake.present? && handshake.status == -1
+        if handshake.update(status: 0)
+          result = handshake.as_json.except('created_at', 'updated_at', 'sender_id', 'receiver_id').merge(user: handshake.receiver_request_user)
+          render json: {results: result, message: "Friend request is sent and approval is pending" }, status: 200
+        else
+          render json: {message: handshake.errors.full_messages.join(', ') }, status: 401
+        end
       else
         handshake = sender.send_friend_requests.new
         handshake.receiver_id = receiver.id
@@ -183,11 +191,11 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def search_users_for_handshake
     if params[:email].present?
-      @users = User.where(email: params[:email])
+      @users = User.all_except(current_resource_owner).where(email: params[:email])
     end
 
     if params[:name].present?
-      @users = @users.present? ? @users.search_by_full_name(params[:name]) :  User.search_by_full_name(params[:name])
+      @users = @users.present? ? @users.search_by_full_name(params[:name]) :  User.all_except(current_resource_owner).search_by_full_name(params[:name])
     end
 
     if @users.present?

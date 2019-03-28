@@ -50,6 +50,8 @@ class User < ApplicationRecord
   validates_uniqueness_of :alias, :allow_blank => true, :allow_nil => true
 	after_create :create_wick
 
+  scope :all_except, ->(user) { where.not(id: user) }
+
 	def create_wick
 		self.wicks.create(name: "Home")
 		wick = Wick.find_by_name("Lifewick")
