@@ -192,6 +192,11 @@ class Api::V1::UsersController < Api::V1::BaseController
   def search_users_for_handshake
     if params[:email].present?
       @users = User.all_except(current_resource_owner).where(email: params[:email])
+      @users = @users.select {|user| 
+        handshake = Handshake.find_by(sender_id: current_resource_owner, receiver_id: user.id)
+        handshake.present? && handshake.status!=1
+
+      }
     end
 
     if params[:name].present?
