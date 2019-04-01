@@ -4,6 +4,15 @@ class Users::PasswordsController < Devise::PasswordsController
   skip_before_action :verify_authenticity_token, only: [:create, :edit]
   skip_before_action :require_no_authentication, only: [:create, :edit, :update]
 
+
+    swagger_controller :Users, 'Password reset'
+
+  swagger_api :create do |api| 
+    summary 'Reset password'
+    param :query, "email", :string, :required, 'Email'
+
+  end
+
   # GET /resource/password/new
   # def new
   #   super

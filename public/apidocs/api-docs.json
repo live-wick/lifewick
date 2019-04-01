@@ -12,6 +12,10 @@
       "description": "Create user"
     },
     {
+      "path": "/apidocs/users/passwords.{format}",
+      "description": "Password reset"
+    },
+    {
       "path": "/apidocs/users/registrations.{format}",
       "description": "User Sign Up"
     },
