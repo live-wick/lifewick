@@ -19,4 +19,5 @@
 
 class Attachment < ApplicationRecord
   belongs_to :strand
+  belongs_to :comment
 end

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
       resources :strands, only: [:create, :update, :destroy] do
         post :add_attachments
+        post :add_comment
         collection do
           get :get_all_strands
         end

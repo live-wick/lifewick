@@ -66,6 +66,14 @@ class Api::V1::StrandsController < Api::V1::BaseController
     param :path, "id", :integer, :required, 'Strand ID'
   end
 
+  swagger_api :add_comment do |api| 
+    summary "Add Comments Into Strand"
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+    param :path, "strand_id", :integer, :required, 'Strand ID'
+    param :query, "attachment", :file, :optional, 'Attachment'
+    param :query, "message", :text, :optional, 'Message'
+  end
+
   def create
     wick = Wick.find(params[:wick_id])
     @strand = wick.strands.new(
@@ -196,6 +204,33 @@ class Api::V1::StrandsController < Api::V1::BaseController
     rescue Exception => e
       render json: {message: e}, status: 500
     end
+
+  end
+
+  def add_comment
+    if !params[:message].present? && !params[:attachment].present?
+      render json: {results: [], message: "Atleast 1 parameter is required from 'message' and 'attachment'" }, status: 500
+    else
+
+      user = current_resource_owner
+      strand = Strand.find(params['strand_id'])
+      if ((strand.shares.find_by(sender_id: user.id).present?) || (strand.shares.find_by(receiver_id: user.id).present?))
+        comment = strand.comments.new
+        comment.user_id = user.id
+        comment.message = params[:message]
+        if comment.save
+          comment.attachment.attach(params[:attachment]) if params[:attachment].present?
+          results = comment
+          results = results.as_json.merge(attachment: url_for(comment.attachment)) if comment.attachment.attached?
+          render json: {results: results, message: "Comment is added successfully" }, status: 200
+        else
+          render json: {results: [], message: comment.errors.full_messages.join(', ') }, status: 422
+        end
+      else
+        render json: {results: [], message: "User is not allowed to comment to this strand" }, status: 404
+      end
+    end
+
 
   end
 

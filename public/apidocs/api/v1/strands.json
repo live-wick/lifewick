@@ -38,6 +38,46 @@
       ]
     },
     {
+      "path": "/api/strands/{strand_id}/add_comment.json",
+      "operations": [
+        {
+          "summary": "Add Comments Into Strand",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "strand_id",
+              "type": "integer",
+              "description": "Strand ID",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "attachment",
+              "type": "file",
+              "description": "Attachment",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "message",
+              "type": "text",
+              "description": "Message",
+              "required": false
+            }
+          ],
+          "nickname": "Api::V1::Strands#add_comment",
+          "method": "post"
+        }
+      ]
+    },
+    {
       "path": "/api/strands/get_all_strands.json",
       "operations": [
         {
