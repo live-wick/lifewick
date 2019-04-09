@@ -227,7 +227,7 @@ class Api::V1::StrandsController < Api::V1::BaseController
         if comment.save
           comment.attachment.attach(params[:attachment]) if params[:attachment].present?
           results = comment
-          results = results.as_json.merge(attachment: url_for(comment.attachment)) if comment.attachment.attached?
+          results = results.as_json.except('user_id').merge(user: user).merge(attachment: comment.attachment.attached? ? url_for(comment.attachment) : nil)
           render json: {results: results, message: "Comment is added successfully" }, status: 200
         else
           render json: {results: [], message: comment.errors.full_messages.join(', ') }, status: 422
@@ -243,7 +243,7 @@ class Api::V1::StrandsController < Api::V1::BaseController
     results = []
     comments = strand.comments
     comments.each do |comment|
-      results << comment.as_json.merge(attachment: comment.attachment.attached? ? url_for(comment.attachment) : nil)
+      results << comment.as_json.except('user_id').merge(user: current_resource_owner).merge(attachment: comment.attachment.attached? ? url_for(comment.attachment) : nil)
     end
     if comments.present?
       render json: {results: results, message: ""}, status: 200
