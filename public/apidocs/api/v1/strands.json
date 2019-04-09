@@ -78,6 +78,32 @@
       ]
     },
     {
+      "path": "/api/strands/{strand_id}/get_comments.json",
+      "operations": [
+        {
+          "summary": "Get Strand Comments",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "strand_id",
+              "type": "integer",
+              "description": "Strand ID",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Strands#get_comments",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/strands/get_all_strands.json",
       "operations": [
         {

@@ -74,6 +74,12 @@ class Api::V1::StrandsController < Api::V1::BaseController
     param :query, "message", :text, :optional, 'Message'
   end
 
+  swagger_api :get_comments do |api| 
+    summary "Get Strand Comments"
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+    param :path, "strand_id", :integer, :required, 'Strand ID'
+  end
+
   def create
     wick = Wick.find(params[:wick_id])
     @strand = wick.strands.new(
@@ -230,8 +236,20 @@ class Api::V1::StrandsController < Api::V1::BaseController
         render json: {results: [], message: "User is not allowed to comment to this strand" }, status: 404
       end
     end
+  end
 
-
+  def get_comments
+    strand = Strand.find(params['strand_id'])
+    results = []
+    comments = strand.comments
+    comments.each do |comment|
+      results << comment.as_json.merge(attachment: comment.attachment.attached? ? url_for(comment.attachment) : nil)
+    end
+    if comments.present?
+      render json: {results: results, message: ""}, status: 200
+    else
+      render json: {results: [], message: "No Comments Present"}, status: 404
+    end
   end
 
   private
