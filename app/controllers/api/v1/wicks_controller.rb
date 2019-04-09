@@ -42,12 +42,12 @@ class Api::V1::WicksController < Api::V1::BaseController
 	end
 
   def get_user_all_wicks
-    @my_wicks = current_resource_owner.wicks
+    @my_wicks = current_resource_owner.wicks.order('created_at desc')
     @shared_wicks = Share.shared_user_wicks(current_resource_owner.id).map(&:shareable)
-    @shared_wicks = Wick.where(id: @shared_wicks.map(&:id)) if @shared_wicks.present?
+    @shared_wicks = Wick.where(id: @shared_wicks.map(&:id)).order('created_at desc') if @shared_wicks.present?
 
     @followed_wicks = Share.followed_user_wicks(current_resource_owner.id).map(&:shareable)
-    @followed_wicks = Wick.where(id: @followed_wicks.map(&:id)) if @followed_wicks.present?
+    @followed_wicks = Wick.where(id: @followed_wicks.map(&:id)).order('created_at desc') if @followed_wicks.present?
 
     if @my_wicks.present?
       results = {}
