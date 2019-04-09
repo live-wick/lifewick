@@ -227,7 +227,9 @@ class Api::V1::StrandsController < Api::V1::BaseController
         if comment.save
           comment.attachment.attach(params[:attachment]) if params[:attachment].present?
           results = comment
-          results = results.as_json.except('user_id').merge(user: user).merge(attachment: comment.attachment.attached? ? url_for(comment.attachment) : nil)
+          avatar = url_for(user.avatar) if user.avatar.attached?
+          user_result = user.as_json.merge(avatar: avatar)
+          results = results.as_json.except('user_id').merge(user: user_result).merge(attachment: comment.attachment.attached? ? url_for(comment.attachment) : nil)
           render json: {results: results, message: "Comment is added successfully" }, status: 200
         else
           render json: {results: [], message: comment.errors.full_messages.join(', ') }, status: 422
@@ -239,11 +241,14 @@ class Api::V1::StrandsController < Api::V1::BaseController
   end
 
   def get_comments
+    user = current_resource_owner
     strand = Strand.find(params['strand_id'])
     results = []
     comments = strand.comments
+    avatar = url_for(user.avatar) if user.avatar.attached?
+    user_result = user.as_json.merge(avatar: avatar)
     comments.each do |comment|
-      results << comment.as_json.except('user_id').merge(user: current_resource_owner).merge(attachment: comment.attachment.attached? ? url_for(comment.attachment) : nil)
+      results << comment.as_json.except('user_id').merge(user: user_result).merge(attachment: comment.attachment.attached? ? url_for(comment.attachment) : nil)
     end
     if comments.present?
       render json: {results: results, message: ""}, status: 200
