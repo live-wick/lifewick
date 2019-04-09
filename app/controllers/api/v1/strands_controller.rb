@@ -202,11 +202,16 @@ class Api::V1::StrandsController < Api::V1::BaseController
   def destroy
     begin
       @strand = Strand.find(params[:id])
-      if @strand.destroy
-        render json: {result: @strand, message: "Strand is successfully deleted" }, status: 200
+      if @strand.user_id == current_resource_owner.id
+        if @strand.destroy
+          render json: {result: @strand, message: "Strand is successfully deleted" }, status: 200
+        else
+          render json: { message: @strand.errors.full_messages.join(', ') }, status: 401      
+        end
       else
-        render json: { message: @strand.errors.full_messages.join(', ') }, status: 401      
+        render json: { message: "Only creator can delete this strand" }, status: 201
       end
+
     rescue Exception => e
       render json: {message: e}, status: 500
     end
