@@ -62,7 +62,7 @@ class Api::V1::WicksController < Api::V1::BaseController
   end
 
   def get_handshake_wicks
-    wicks = current_resource_owner.wicks
+    wicks = current_resource_owner.wicks.order('created_at desc')
     handshake = Handshake.find(params[:handshake_id])
     opponent_id = current_resource_owner.id == handshake.sender_id ? handshake.receiver_id : handshake.sender_id
     results = []

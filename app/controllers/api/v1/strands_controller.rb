@@ -1,4 +1,5 @@
 require 'will_paginate/array'
+include ActionView::Helpers::DateHelper
 class Api::V1::StrandsController < Api::V1::BaseController
 
 
@@ -234,7 +235,7 @@ class Api::V1::StrandsController < Api::V1::BaseController
           results = comment
           avatar = url_for(user.avatar) if user.avatar.attached?
           user_result = user.as_json.merge(avatar: avatar)
-          results = results.as_json.except('user_id').merge(user: user_result).merge(attachment: comment.attachment.attached? ? url_for(comment.attachment) : nil)
+          results = results.as_json.except('user_id', 'created_at', 'updated_at').merge(time_at: "#{time_ago_in_words(comment.updated_at)} ago").merge(user: user_result).merge(attachment: comment.attachment.attached? ? url_for(comment.attachment) : nil)
           render json: {results: results, message: "Comment is added successfully" }, status: 200
         else
           render json: {results: [], message: comment.errors.full_messages.join(', ') }, status: 422
@@ -253,7 +254,7 @@ class Api::V1::StrandsController < Api::V1::BaseController
     avatar = url_for(user.avatar) if user.avatar.attached?
     user_result = user.as_json.merge(avatar: avatar)
     comments.each do |comment|
-      results << comment.as_json.except('user_id').merge(user: user_result).merge(attachment: comment.attachment.attached? ? url_for(comment.attachment) : nil)
+      results << comment.as_json.except('user_id', 'created_at', 'updated_at').merge(time_at: "#{time_ago_in_words(comment.updated_at)} ago").merge(user: user_result).merge(attachment: comment.attachment.attached? ? url_for(comment.attachment) : nil)
     end
     if comments.present?
       render json: {results: results, message: ""}, status: 200
