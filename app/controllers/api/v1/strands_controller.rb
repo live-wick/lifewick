@@ -247,13 +247,13 @@ class Api::V1::StrandsController < Api::V1::BaseController
   end
 
   def get_comments
-    user = current_resource_owner
     strand = Strand.find(params['strand_id'])
     results = []
     comments = strand.comments
-    avatar = url_for(user.avatar) if user.avatar.attached?
-    user_result = user.as_json.merge(avatar: avatar)
     comments.each do |comment|
+      user = comment.user
+      avatar = url_for(user.avatar) if user.avatar.attached?
+      user_result = user.as_json.merge(avatar: avatar)
       results << comment.as_json.except('user_id', 'created_at', 'updated_at').merge(time_at: "#{time_ago_in_words(comment.updated_at)} ago").merge(user: user_result).merge(attachment: comment.attachment.attached? ? url_for(comment.attachment) : nil)
     end
     if comments.present?

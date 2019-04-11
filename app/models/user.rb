@@ -66,7 +66,7 @@ class User < ApplicationRecord
     when 2
       where("lower(first_name) LIKE :search1 AND lower(last_name) LIKE :search2", search1: "#{@names[0]}", search2: "#{@names[1]}")
     when 1
-      where("lower(first_name) LIKE :search1 OR lower(last_name) LIKE :search1", search1: "#{@names[0].downcase}")
+      where("lower(first_name) LIKE :search1 OR lower(last_name) LIKE :search1", search1: "%#{@names[0].downcase}%")
     else
       all
     end
