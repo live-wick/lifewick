@@ -7,6 +7,13 @@ class Api::V1::WicksController < Api::V1::BaseController
     param :query, "name", :string, :required, 'Wick Name'
   end
 
+  swagger_api :update do |api| 
+    summary 'Update Wick'
+    param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
+    param :path, "id", :integer, :required, 'Wick ID'
+    param :query, "name", :string, :required, 'Wick Name'
+  end
+
   swagger_api :get_user_all_wicks do |api| 
     summary 'Get User Wicks'
     param :header, 'Authorization', :string, :required, "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]"
@@ -40,6 +47,19 @@ class Api::V1::WicksController < Api::V1::BaseController
 			render json: { message: @wick.errors.full_messages.join(', '), result: @wick }, status: 401
 		end
 	end
+
+  def update
+    @wick = current_resource_owner.wicks.find(params[:id])
+    if params[:name].present?
+      if @wick.update(name: params[:name])
+        render json: { message: "Wick updated successfully", result: @wick }, status: 200
+      else
+        render json: { message: @wick.errors.full_messages.join(', '), result: @wick }, status: 401
+      end
+    else
+       render json: { message: "Name parameter is missing", result: "" }, status: 422
+    end
+  end
 
   def get_user_all_wicks
     @my_wicks = current_resource_owner.wicks.order('created_at desc')

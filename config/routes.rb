@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       #      registrations: 'api/v1/users/registrations',
       #  }, skip: [:sessions, :password]
 
-      resources :wicks, only: :create do
+      resources :wicks, only: [:create, :update] do
         collection do
           get :get_user_all_wicks
           get :get_handshake_wicks

@@ -140,6 +140,39 @@
           "method": "post"
         }
       ]
+    },
+    {
+      "path": "/api/wicks/{id}.json",
+      "operations": [
+        {
+          "summary": "Update Wick",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "e.g Bearer [ACCESS TOKEN RETRIEVED DURING SIGN IN API]",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Wick ID",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "name",
+              "type": "string",
+              "description": "Wick Name",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Wicks#update",
+          "method": "patch"
+        }
+      ]
     }
   ],
   "authorizations": null
